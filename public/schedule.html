@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Pull in Trello styling -->
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css" />
+    <style>
+      select {
+        height: 30px;
+      }
+    </style>
+    <!-- pull in the Trello Power-Up API -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+
+  <body>
+    <form id="schedule">
+      <script src="./js/schedule.js"></script>
+      <label for="scheduledCard">Schedule for:</label>
+      <input type="date" id="scheduledCard" name="dateScheduled" />
+      <button type="submit" class="mod-primary">Save</button>
+    </form>
+  </body>
+</html>
