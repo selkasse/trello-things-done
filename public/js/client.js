@@ -19,14 +19,14 @@ fetchID().then(id => {
 const onCardBtnClick = function (t, options) {
     return t.popup({
         title: 'Add to future board',
-        url: '/../schedule.html'
+        url: '/public/schedule.html'
     });
 }
 
 const onBoardBtnClick = function (t, options) {
     return t.popup({
         title: 'Change Master Board',
-        url: '/../master.html'
+        url: '/public/master.html'
     })
 }
 
