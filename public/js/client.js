@@ -49,8 +49,19 @@ const getBoards = async (id) => {
 }
 
 const getEnabledBoards = async (boards) => {
-    let boards;
-    return 'mock response from getEnabledBoards';
+    let enabledBoards;
+    await fetch('/.netlify/functions/getEnabledBoards', {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify(boards)
+    })
+    .then(res => res.json())
+    .then(res => {
+        enabledBoards = res;
+    });
+    return enabledBoards;
 }
 
 // holds the values for:
@@ -92,6 +103,8 @@ TrelloPowerUp.initialize({
                 enabledBoards
             };
 
+            console.log(configParams);
+            
             return [{
                 icon: {
                     dark: MASTER_ICON_DARK,
