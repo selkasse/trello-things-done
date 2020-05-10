@@ -48,20 +48,21 @@ const getBoards = async (id) => {
     return boards;
 }
 
-const formatBoards = (boards) => {
-    let formattedBoards = [];
-    for(board in boards){
-        const formattedBoard = {
-            id: boards[board].id,
-            name: boards[board].name
-        }
-        formattedBoards.push(formattedBoard);
-    }
-    return formattedBoards;
-}
+// const formatBoards = (boards) => {
+//     let formattedBoards = [];
+//     for(board in boards){
+//         const formattedBoard = {
+//             id: boards[board].id,
+//             name: boards[board].name
+//         }
+//         formattedBoards.push(formattedBoard);
+//     }
+//     return formattedBoards;
+// }
 
 const getEnabledBoards = async (boards) => {
     console.log(boards);
+    const data = { boards }
     let enabledBoards;
     await fetch('/.netlify/functions/getEnabledBoards', {
         method: "POST",
@@ -105,10 +106,10 @@ TrelloPowerUp.initialize({
                 memberBoards = boards;
             })
 
-            const formattedBoards = formatBoards(memberBoards);
-            console.log(formattedBoards);
+            // const formattedBoards = formatBoards(memberBoards);
+            // console.log(formattedBoards);
             
-            await getEnabledBoards(formattedBoards)
+            await getEnabledBoards(memberBoards)
             .then(function(boards){
                 enabledBoards = boards;
             })
