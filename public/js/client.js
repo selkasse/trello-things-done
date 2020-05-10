@@ -56,8 +56,10 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
                 // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
-                const currentMember = t.getContext().member;
+                const {currentMember, currentBoard} = t.getContext();
+                // const currentMember = t.getContext().member;
                 console.log(currentMember);
+                console.log(currentBoard);
                 const currentBoard = t.getContext().board;
                 const boardsConfig = {
                     currentBoard,
