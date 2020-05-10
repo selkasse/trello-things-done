@@ -41,7 +41,9 @@ const getBoards = async (id) => {
         body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(res => console.log(res));
+    .then(res => {
+        return res;
+    });
 }
 
 let configParams;
