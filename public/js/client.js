@@ -106,8 +106,9 @@ TrelloPowerUp.initialize({
                 memberBoards,
                 enabledBoards
             };
+            
+           
 
-            console.log(configParams);
 
             return [{
                 icon: {
@@ -168,3 +169,5 @@ TrelloPowerUp.initialize({
             })
     }
 });
+
+console.log(configParams);
