@@ -36,7 +36,7 @@ const getBoards = async (id) => {
     await fetch('/.netlify/functions/getMemberBoards', {
         method: "POST",
         body: JSON.stringify(data)
-    }).then(response => {
+    }).then(async function(response) {
         const boardsResponse = await response.json();
         // console.log(response.json());
         return boardsResponse;
