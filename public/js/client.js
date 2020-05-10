@@ -124,32 +124,28 @@ TrelloPowerUp.initialize({
     'card-buttons': function (t, options) {
         
         const {isMaster} = configParams;
-        console.log(`isMaster in card-buttons: ${isMaster}`);
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
-            text: isMaster ? 'TTD' : null,
+            text: isMaster ? 'GTD' : null,
             callback: onCardBtnClick
         }];
             
     },
     'card-badges': function (t, options) {
-        // return t.get('member', 'shared', 'masterBoard')
-        //     .then(function(masterBoard){
-        //         const currentBoard = t.getContext().board;
-        //         const isMaster = currentBoard === masterBoard;
-        const {isMaster} = configParams;
-        console.log(`isMaster in card-badges: ${isMaster}`);
-
-        return t.get('card', 'shared', 'schedule')
-            .then(function (schedule) {
-                // if (isMaster){
-                    return [{
-                        icon: schedule && isMaster ? CHECK_MARK_ICON : null,
-                        text: schedule && isMaster ? schedule : null
-                    }];
-                // }
-            });                
-            // })
+        return t.get('member', 'shared', 'masterBoard')
+            .then(function(masterBoard){
+                const currentBoard = t.getContext().board;
+                const isMaster = currentBoard === masterBoard;
+                    return t.get('card', 'shared', 'schedule')
+                        .then(function (schedule) {
+                            if (isMaster){
+                                return [{
+                                    icon: schedule ? CHECK_MARK_ICON : null,
+                                    text: schedule ? schedule : null
+                                }];
+                            }
+                        });                
+            })
     },
     // only show card detail badges if master board
     'card-detail-badges': function (t, options) {
