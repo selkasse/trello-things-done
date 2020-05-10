@@ -59,6 +59,7 @@ const getEnabledBoards = async (boards) => {
     })
     .then(res => res.json())
     .then(res => {
+        console.log(res);
         enabledBoards = res;
     });
     return enabledBoards;
@@ -83,7 +84,7 @@ TrelloPowerUp.initialize({
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard){
-            
+
             const isMaster = currentBoard === masterBoard;
             
             await getBoards(currentMember)
