@@ -47,7 +47,14 @@ const getUserConfig = async (configParams) => {
 // })
 const getBoards = async (id) => {
     console.log(id);
+    const data = {memberID: id};
     // TODO : make this a POST with fetch
+    fetch('/.netlify/functions/getMemberBoards', {
+        method: "POST",
+        body: JSON.stringify(data)
+    }).then(response => {
+        console.log(response);
+    })
     // const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
     // return boards;
     return 'mock response from getBoards';
