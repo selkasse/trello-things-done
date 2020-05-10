@@ -124,9 +124,10 @@ TrelloPowerUp.initialize({
     'card-buttons': function (t, options) {
         
         const {isMaster} = configParams;
+        console.log(`isMaster in card-buttons: ${isMaster}`);
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
-            text: isMaster ? 'GTD' : null,
+            text: isMaster ? 'TTD' : null,
             callback: onCardBtnClick
         }];
             
@@ -136,7 +137,8 @@ TrelloPowerUp.initialize({
         //     .then(function(masterBoard){
         //         const currentBoard = t.getContext().board;
         //         const isMaster = currentBoard === masterBoard;
-        const { isMaster } = configParams;
+        const {isMaster} = configParams;
+        console.log(`isMaster in card-badges: ${isMaster}`);
 
         return t.get('card', 'shared', 'schedule')
             .then(function (schedule) {
