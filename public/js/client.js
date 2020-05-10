@@ -5,27 +5,6 @@ const MASTER_ICON_DARK = 'https://img.icons8.com/material/96/000000/master.png';
 const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/master.png';
 
 
-const getUserConfig = async (boardsConfig) => {
-    // TODO : determine if the current board is the master board
-    // TODO : load all TTD-enabled boards into the app
-    // 
-    const ID = await (await fetch('/.netlify/functions/getMemberID')).json();
-    return ID;
-    // TODO : send a POST request to checkIfMaster with ${boardsConfig} as the body
-    // TODO : send a POST request to getMemberBoards netlify function, with ${id} in the body
-}
-
-
-// TODO : get all of the config on page load with the code below
-// getUserConfig().then(config => {
-//     TrelloPowerUp.initialize({
-//         // ...
-//     })
-// })
-// TODO : once that is working, separate the API calls as needed for better performance
-
-
-
 const onCardBtnClick = function (t, options) {
     return t.popup({
         title: 'Add to future board',
@@ -39,21 +18,68 @@ const onBoardBtnClick = function (t, options) {
         url: '/public/master.html'
     })
 }
+const getUserConfig = async (configParams) => {
+    // this statement will go away, since we get the memberID from configParams.member
+    const isMaster = configParams.currentBoard === configParams.masterBoard;
+    // TODO : START
+    // const boards = make POST request to .netlify/functions/getMemberBoards, passing in configParams.currentMember
+    /*
+    for (board in boards){
+        check if board has TTD enabled
+        set board.enabled to TRUE or FALSE
+    }
+    */
+   // TODO : END
+   const ID = await (await fetch('/.netlify/functions/getMemberID')).json();
+   return ID;
+    // TODO : send a POST request to checkIfMaster with ${boardsConfig} as the body
+    // TODO : send a POST request to getMemberBoards netlify function, with ${id} in the body
+}
 
-let config;
+// const getID = async () => {
+//     const ID = await (await fetch('http://localhost:9000/getMemberID')).json();
+//     return ID;
+// }
+
+// getID().then((id) => {
+//     const h2 = document.getElementById('member');
+//     h2.innerHTML += ` ${id}`;
+// })
+const getBoards = async (id) => {
+    console.log(id);
+    // TODO : make this a POST with fetch
+    const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
+    // return boards;
+    return 'mock response from getBoards';
+}
+
+let configParams;
+let isMaster;
+let enabledBoards;
 
 TrelloPowerUp.initialize({
 
-    'board-buttons': function (t, options) {
+    'board-buttons': async function (t, options) {
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
         return t.get('member', 'shared', 'masterBoard')
         .then(function (masterBoard){
-            config = {
+            configParams = {
                 currentMember,
                 currentBoard,
                 masterBoard
-            }
+            };
+            await getBoards(currentMember)
+                .then(function(boards){
+                    console.log(boards);
+                })
+            // TODO : send config to getUserConfig()
+            /*
+            TODO : getUserConfig(configParams).then(
+                set isMaster
+                set enabledBoards
+            )
+            */
             console.log(config);
             console.log(currentMember, currentBoard, masterBoard);
             return [{
