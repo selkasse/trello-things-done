@@ -37,8 +37,9 @@ const getBoards = async (id) => {
         method: "POST",
         body: JSON.stringify(data)
     }).then(response => {
-        console.log(response.json());
-        return response.json();
+        const boardsResponse = await response.json();
+        // console.log(response.json());
+        return boardsResponse;
     })
     // return 'mock response from getBoards';
 }
