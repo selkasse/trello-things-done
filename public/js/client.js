@@ -78,10 +78,10 @@ TrelloPowerUp.initialize({
             };
 
 
-            // await getBoards(currentMember)
-            //     .then(function(boards){
-            //         console.log(boards);
-            //     })
+            await getBoards(currentMember)
+                .then(function(boards){
+                    console.log(boards);
+                })
            
             return [{
                 icon: {
