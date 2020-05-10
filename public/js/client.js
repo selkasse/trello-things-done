@@ -64,7 +64,7 @@ const getEnabledBoards = async (boards) => {
         console.log(res);
         enabledBoards = res;
     });
-    configParams.enabledBoards = enabledBoards;
+    // configParams.enabledBoards = enabledBoards;
     return enabledBoards;
 }
 
@@ -101,13 +101,14 @@ TrelloPowerUp.initialize({
             })
             
             // * populate configParams when the board loads
-            // configParams = {
-            //     currentMember,
-            //     isMaster,
-            //     memberBoards,
-            //     enabledBoards
-            // };
+            configParams = {
+                currentMember,
+                isMaster,
+                memberBoards,
+                enabledBoards
+            };
             
+            export default configParams;
            
 
 
