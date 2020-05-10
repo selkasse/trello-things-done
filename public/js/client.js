@@ -6,6 +6,9 @@ const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/ma
 
 
 const getUserConfig = async (boardsConfig) => {
+    // TODO : determine if the current board is the master board
+    // TODO : load all TTD-enabled boards into the app
+    // 
     const ID = await (await fetch('/.netlify/functions/getMemberID')).json();
     return ID;
     // TODO : send a POST request to checkIfMaster with ${boardsConfig} as the body
@@ -53,6 +56,8 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
                 // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
+                const currentMember = t.getContext().member;
+                console.log(currentMember);
                 const currentBoard = t.getContext().board;
                 const boardsConfig = {
                     currentBoard,
