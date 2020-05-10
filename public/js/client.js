@@ -40,16 +40,21 @@ const onBoardBtnClick = function (t, options) {
 
 TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
-        console.log(t.getContext().member);
-        return [{
-            icon: {
-                dark: MASTER_ICON_DARK,
-                light: MASTER_ICON_LIGHT
-            },
-            text: 'Master Board',
-            callback: onBoardBtnClick,
-            condition: 'edit'
-        }]
+        const currentMember = t.getContext().member;
+        const currentBoard = t.getContext().board;
+        return t.get('member', 'shared', 'masterBoard')
+        .then(function (masterBoard){
+            console.log(currentMember, currentBoard, masterBoard);
+            return [{
+                icon: {
+                    dark: MASTER_ICON_DARK,
+                    light: MASTER_ICON_LIGHT
+                },
+                text: 'Master Board',
+                callback: onBoardBtnClick,
+                condition: 'edit'
+            }]
+        });
     },
     // only show card buttons if master board
     'card-buttons': async function (t, options) {
@@ -58,14 +63,14 @@ TrelloPowerUp.initialize({
                 // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
                 const {currentMember, currentBoard} = t.getContext();
                 // const currentMember = t.getContext().member;
-                console.log(currentMember);
-                console.log(currentBoard);
+                // console.log(currentMember);
+                // console.log(currentBoard);
                 // const currentBoard = t.getContext().board;
-                const boardsConfig = {
-                    currentBoard,
-                    masterBoard
-                };
-                const userConfig = getUserConfig(boardsConfig);
+                // const boardsConfig = {
+                //     currentBoard,
+                //     masterBoard
+                // };
+                // const userConfig = getUserConfig(boardsConfig);
                 const isMaster = currentBoard === masterBoard;
                 return [{
                     icon: isMaster ? CHECK_MARK_ICON : null,
