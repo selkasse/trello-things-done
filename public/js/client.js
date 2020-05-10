@@ -33,6 +33,7 @@ const onBoardBtnClick = function (t, options) {
 // })
 const getBoards = async (id) => {
     const data = { memberID: id };
+    let boards;
     await fetch('/.netlify/functions/getMemberBoards', {
         method: "POST",
         headers: {
@@ -42,8 +43,9 @@ const getBoards = async (id) => {
     })
     .then(res => res.json())
     .then(res => {
-        return res;
+        boards = res;
     });
+    return boards;
 }
 
 let configParams;
