@@ -33,7 +33,7 @@ const onBoardBtnClick = function (t, options) {
 
 TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
-        console.log(t.getContext());
+        console.log(t.getContext().member);
         return [{
             icon: {
                 dark: MASTER_ICON_DARK,
