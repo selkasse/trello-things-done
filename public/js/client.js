@@ -60,7 +60,7 @@ TrelloPowerUp.initialize({
                 // const currentMember = t.getContext().member;
                 console.log(currentMember);
                 console.log(currentBoard);
-                const currentBoard = t.getContext().board;
+                // const currentBoard = t.getContext().board;
                 const boardsConfig = {
                     currentBoard,
                     masterBoard
