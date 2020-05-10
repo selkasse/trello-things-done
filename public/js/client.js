@@ -49,11 +49,11 @@ const getBoards = async (id) => {
     console.log(id);
     const data = {memberID: id};
     // TODO : make this a POST with fetch
-    fetch('/.netlify/functions/getMemberBoards', {
+    await fetch('/.netlify/functions/getMemberBoards', {
         method: "POST",
         body: JSON.stringify(data)
     }).then(response => {
-        console.log(await response.json());
+        console.log(response.json());
     })
     // const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
     // return boards;
