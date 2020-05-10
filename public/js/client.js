@@ -48,29 +48,50 @@ const getBoards = async (id) => {
     return boards;
 }
 
+const getEnabledBoards = async (boards) => {
+    let boards;
+    return 'mock response from getEnabledBoards';
+}
+
+// holds the values for:
+// * currentMember
+// * isMaster
+// * memberBoards
+// * enabledBoards
 let configParams;
-let isMaster;
-let enabledBoards;
+
 
 TrelloPowerUp.initialize({
 
     'board-buttons': function (t, options) {
+
+        // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
+        const isMaster = currentBoard === masterBoard;
+        let memberBoards;
+        let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard){
-            const isMaster = currentBoard === masterBoard;
-            configParams = {
-                currentMember,
-                isMaster
-            };
-
 
             await getBoards(currentMember)
-                .then(function(boards){
-                    console.log(boards);
-                })
-           
+            .then(function(boards){
+                memberBoards = boards;
+            })
+
+            await getEnabledBoards(memberBoards)
+            .then(function(boards){
+                enabledBoards = boards;
+            })
+            
+            // * populate configParams when the board loads
+            configParams = {
+                currentMember,
+                isMaster,
+                memberBoards,
+                enabledBoards
+            };
+
             return [{
                 icon: {
                     dark: MASTER_ICON_DARK,
