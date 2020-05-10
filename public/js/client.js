@@ -49,6 +49,7 @@ const getBoards = async (id) => {
 }
 
 const getEnabledBoards = async (boards) => {
+    console.log(boards);
     let enabledBoards;
     await fetch('/.netlify/functions/getEnabledBoards', {
         method: "POST",
