@@ -1,5 +1,5 @@
 // import {test} from './client.js';
-import {configParams} from './client.js';
+// import {configParams} from './client.js';
 const t = TrelloPowerUp.iframe();
 
 window.master.addEventListener('submit', function (event) {
