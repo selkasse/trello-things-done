@@ -48,18 +48,6 @@ const getBoards = async (id) => {
     return boards;
 }
 
-// const formatBoards = (boards) => {
-//     let formattedBoards = [];
-//     for(board in boards){
-//         const formattedBoard = {
-//             id: boards[board].id,
-//             name: boards[board].name
-//         }
-//         formattedBoards.push(formattedBoard);
-//     }
-//     return formattedBoards;
-// }
-
 const getEnabledBoards = async (boards) => {
     console.log(boards);
     const data = { boards }
@@ -105,9 +93,6 @@ TrelloPowerUp.initialize({
             .then(function(boards){
                 memberBoards = boards;
             })
-
-            // const formattedBoards = formatBoards(memberBoards);
-            // console.log(formattedBoards);
             
             await getEnabledBoards(memberBoards)
             .then(function(boards){
@@ -147,20 +132,22 @@ TrelloPowerUp.initialize({
             
     },
     'card-badges': function (t, options) {
-        return t.get('member', 'shared', 'masterBoard')
-            .then(function(masterBoard){
-                const currentBoard = t.getContext().board;
-                const isMaster = currentBoard === masterBoard;
-                    return t.get('card', 'shared', 'schedule')
-                        .then(function (schedule) {
-                            if (isMaster){
-                                return [{
-                                    icon: schedule ? CHECK_MARK_ICON : null,
-                                    text: schedule ? schedule : null
-                                }];
-                            }
-                        });                
-            })
+        // return t.get('member', 'shared', 'masterBoard')
+        //     .then(function(masterBoard){
+        //         const currentBoard = t.getContext().board;
+        //         const isMaster = currentBoard === masterBoard;
+        const { isMaster } = configParams;
+
+        return t.get('card', 'shared', 'schedule')
+            .then(function (schedule) {
+                if (isMaster){
+                    return [{
+                        icon: schedule ? CHECK_MARK_ICON : null,
+                        text: schedule ? schedule : null
+                    }];
+                }
+            });                
+            // })
     },
     // only show card detail badges if master board
     'card-detail-badges': function (t, options) {
