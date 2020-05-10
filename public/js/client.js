@@ -48,7 +48,7 @@ const getUserConfig = async (configParams) => {
 const getBoards = async (id) => {
     console.log(id);
     // TODO : make this a POST with fetch
-    const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
+    // const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
     // return boards;
     return 'mock response from getBoards';
 }
