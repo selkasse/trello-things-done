@@ -49,8 +49,6 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
                 const currentBoard = t.getContext().board;
-                console.log(currentBoard);
-                console.log(masterBoard);
                 const isMaster = currentBoard === masterBoard;
                 return [{
                     icon: isMaster ? CHECK_MARK_ICON : null,
@@ -60,13 +58,27 @@ TrelloPowerUp.initialize({
             })
     },
     'card-badges': function (t, options) {
-        return t.get('card', 'shared', 'schedule')
-            .then(function (schedule) {
+        return t.get('member', 'shared', 'masterBoard')
+            .then(function(masterBoard){
+                const currentBoard = t.getContext().board;
+                const isMaster = currentBoard === masterBoard;
+                if (isMaster){
+                    return t.get('card', 'shared', 'schedule')
+                        .then(function (schedule) {
+                            return [{
+                                icon: schedule ? CHECK_MARK_ICON : null,
+                                text: schedule ? schedule : null
+                            }];
+                        });
+                }
+         
                 return [{
-                    icon: schedule ? CHECK_MARK_ICON : null,
-                    text: schedule ? schedule : null
+                    icon: CHECK_MARK_ICON,
+                    text: 'Scheduled from Master Board'
                 }];
-            });
+      
+                
+            })
     },
     // only show card detail badges if master board
     'card-detail-badges': function (t, options) {
