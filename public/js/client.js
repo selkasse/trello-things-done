@@ -59,11 +59,11 @@ let enabledBoards;
 
 TrelloPowerUp.initialize({
 
-    'board-buttons': async function (t, options) {
+    'board-buttons': function (t, options) {
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
         return t.get('member', 'shared', 'masterBoard')
-        .then(function (masterBoard){
+        .then(async function (masterBoard){
             configParams = {
                 currentMember,
                 currentBoard,
