@@ -1,4 +1,4 @@
-import axios from '/axios';
+// import axios from '/axios';
 
 const Promise = TrelloPowerUp.Promise;
 
@@ -32,21 +32,13 @@ const onBoardBtnClick = function (t, options) {
 //     h2.innerHTML += ` ${id}`;
 // })
 const getBoards = async (id) => {
-    console.log(id);
     const data = { memberID: id };
-    axios.post('/.netlify/functions/getMemberBoards', data)
-    .then(function(response){
-        console.log(response);
-    }).catch(function(error){
-        console.log(error);
+    await fetch('/.netlify/functions/getMemberBoards', {
+        method: "POST",
+        body: JSON.stringify(data)
+    }).then(response => {
+        console.log(response.json());
     })
-    // // TODO : make this a POST with fetch
-    // await fetch('/.netlify/functions/getMemberBoards', {
-    //     method: "POST",
-    //     body: JSON.stringify(data)
-    // }).then(response => {
-    //     console.log(response.json());
-    // })
     return 'mock response from getBoards';
 }
 
