@@ -49,6 +49,8 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
                 const currentBoard = t.getContext().board;
+                console.log(currentBoard);
+                console.log(masterBoard);
                 const isMaster = currentBoard === masterBoard;
                 return [{
                     icon: isMaster ? CHECK_MARK_ICON : null,
