@@ -56,7 +56,7 @@ const getEnabledBoards = async (boards) => {
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-        body: JSON.stringify(Object.assign({}, boards))
+        body: JSON.stringify(boards)
     })
     .then(res => res.json())
     .then(res => {
@@ -94,7 +94,7 @@ TrelloPowerUp.initialize({
             })
 
             
-            await getEnabledBoards(memberBoards)
+            await getEnabledBoards(Object.assign({},memberBoards))
             .then(function(boards){
                 enabledBoards = boards;
             })
