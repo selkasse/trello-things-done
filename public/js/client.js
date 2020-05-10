@@ -35,13 +35,14 @@ const getBoards = async (id) => {
     const data = { memberID: id };
     await fetch('/.netlify/functions/getMemberBoards', {
         method: "POST",
+        headers: {
+            'Accept': 'application / json',
+            'Content - Type': 'application / json'
+        },
         body: JSON.stringify(data)
-    }).then(async function(response) {
-        const boardsResponse = await response.json();
-        // console.log(response.json());
-        return boardsResponse;
     })
-    // return 'mock response from getBoards';
+    .then(res => res.json())
+    .then(res => console.log(res));
 }
 
 let configParams;
@@ -79,7 +80,7 @@ TrelloPowerUp.initialize({
         });
     },
     // only show card buttons if master board
-    'card-buttons': async function (t, options) {
+    'card-buttons': function (t, options) {
         
         const {isMaster} = configParams;
         return [{
