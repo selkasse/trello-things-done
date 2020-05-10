@@ -5,16 +5,20 @@ const MASTER_ICON_DARK = 'https://img.icons8.com/material/96/000000/master.png';
 const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/master.png';
 
 
-const fetchID = async () => {
+const getUserConfig = async (boardsConfig) => {
     const ID = await (await fetch('/.netlify/functions/getMemberID')).json();
     return ID;
+    // TODO : send a POST request to checkIfMaster with ${boardsConfig} as the body
+    // TODO : send a POST request to getMemberBoards netlify function, with ${id} in the body
 }
 
-fetchID().then(id => {
-    console.log(id);
-    const h1 = document.getElementById('member');
-    h1.innerHTML += ` ${id}`
-})
+// fetchID().then(id => {
+//     console.log(id);
+//     const h1 = document.getElementById('member');
+//     h1.innerHTML += ` ${id}`
+// })
+
+
 
 const onCardBtnClick = function (t, options) {
     return t.popup({
@@ -45,10 +49,16 @@ TrelloPowerUp.initialize({
         }]
     },
     // only show card buttons if master board
-    'card-buttons': function (t, options) {
+    'card-buttons': async function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
+                // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
                 const currentBoard = t.getContext().board;
+                const boardsConfig = {
+                    currentBoard,
+                    masterBoard
+                };
+                const userConfig = getUserConfig(boardsConfig);
                 const isMaster = currentBoard === masterBoard;
                 return [{
                     icon: isMaster ? CHECK_MARK_ICON : null,
