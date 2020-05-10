@@ -48,6 +48,18 @@ const getBoards = async (id) => {
     return boards;
 }
 
+const formatBoards = (boards) => {
+    let formattedBoards = [];
+    for(board in boards){
+        const formattedBoard = {
+            id: boards[board].id,
+            name: board[board].name
+        }
+        formattedBoards.push(formattedBoard);
+    }
+    return formattedBoards;
+}
+
 const getEnabledBoards = async (boards) => {
     console.log(boards);
     let enabledBoards;
@@ -93,6 +105,8 @@ TrelloPowerUp.initialize({
                 memberBoards = boards;
             })
 
+            const formattedBoards = formatBoards(memberBoards);
+            console.log(formattedBoards);
             
             await getEnabledBoards(memberBoards)
             .then(function(boards){
