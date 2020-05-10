@@ -15,11 +15,14 @@ const getUserConfig = async (boardsConfig) => {
     // TODO : send a POST request to getMemberBoards netlify function, with ${id} in the body
 }
 
-// fetchID().then(id => {
-//     console.log(id);
-//     const h1 = document.getElementById('member');
-//     h1.innerHTML += ` ${id}`
+
+// TODO : get all of the config on page load with the code below
+// getUserConfig().then(config => {
+//     TrelloPowerUp.initialize({
+//         // ...
+//     })
 // })
+// TODO : once that is working, separate the API calls as needed for better performance
 
 
 
@@ -37,8 +40,10 @@ const onBoardBtnClick = function (t, options) {
     })
 }
 
+console.log(t.getContext());
 
 TrelloPowerUp.initialize({
+
     'board-buttons': function (t, options) {
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
