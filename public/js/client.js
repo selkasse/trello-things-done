@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const Promise = TrelloPowerUp.Promise;
 
 const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png';
@@ -18,23 +20,7 @@ const onBoardBtnClick = function (t, options) {
         url: '/public/master.html'
     })
 }
-const getUserConfig = async (configParams) => {
-    // this statement will go away, since we get the memberID from configParams.member
-    const isMaster = configParams.currentBoard === configParams.masterBoard;
-    // TODO : START
-    // const boards = make POST request to .netlify/functions/getMemberBoards, passing in configParams.currentMember
-    /*
-    for (board in boards){
-        check if board has TTD enabled
-        set board.enabled to TRUE or FALSE
-    }
-    */
-   // TODO : END
-   const ID = await (await fetch('/.netlify/functions/getMemberID')).json();
-   return ID;
-    // TODO : send a POST request to checkIfMaster with ${boardsConfig} as the body
-    // TODO : send a POST request to getMemberBoards netlify function, with ${id} in the body
-}
+
 
 // const getID = async () => {
 //     const ID = await (await fetch('http://localhost:9000/getMemberID')).json();
@@ -47,16 +33,20 @@ const getUserConfig = async (configParams) => {
 // })
 const getBoards = async (id) => {
     console.log(id);
-    const data = {memberID: id};
-    // TODO : make this a POST with fetch
-    await fetch('/.netlify/functions/getMemberBoards', {
-        method: "POST",
-        body: JSON.stringify(data)
-    }).then(response => {
-        console.log(response.json());
+    const data = { memberID: id };
+    axios.post('/.netlify/functions/getMemberBoards', data)
+    .then(function(response){
+        console.log(response);
+    }).catch(function(error){
+        console.log(error);
     })
-    // const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
-    // return boards;
+    // // TODO : make this a POST with fetch
+    // await fetch('/.netlify/functions/getMemberBoards', {
+    //     method: "POST",
+    //     body: JSON.stringify(data)
+    // }).then(response => {
+    //     console.log(response.json());
+    // })
     return 'mock response from getBoards';
 }
 
