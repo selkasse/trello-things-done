@@ -91,7 +91,7 @@ TrelloPowerUp.initialize({
             .then(function(boards){
                 memberBoards = boards;
             })
-
+            console.log(memberBoards);
             await getEnabledBoards(memberBoards)
             .then(function(boards){
                 enabledBoards = boards;
