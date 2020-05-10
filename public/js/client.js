@@ -70,10 +70,6 @@ TrelloPowerUp.initialize({
                                     text: schedule ? schedule : null
                                 }];
                             }
-                            return [{
-                                icon: CHECK_MARK_ICON,
-                                text: 'Scheduled from Master Board'
-                            }];
                         });                
             })
     },
