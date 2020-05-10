@@ -79,12 +79,13 @@ TrelloPowerUp.initialize({
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
-        const isMaster = currentBoard === masterBoard;
         let memberBoards;
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard){
-
+            
+            const isMaster = currentBoard === masterBoard;
+            
             await getBoards(currentMember)
             .then(function(boards){
                 memberBoards = boards;
@@ -104,7 +105,7 @@ TrelloPowerUp.initialize({
             };
 
             console.log(configParams);
-            
+
             return [{
                 icon: {
                     dark: MASTER_ICON_DARK,
