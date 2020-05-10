@@ -52,8 +52,8 @@ const formatBoards = (boards) => {
     let formattedBoards = [];
     for(board in boards){
         const formattedBoard = {
-            id: boards[board].id,
-            name: board[board].name
+            // id: boards[board].id,
+            // name: board[board].name
         }
         formattedBoards.push(formattedBoard);
     }
