@@ -53,7 +53,7 @@ const getBoards = async (id) => {
         method: "POST",
         body: JSON.stringify(data)
     }).then(response => {
-        console.log(response);
+        console.log(response.data);
     })
     // const boards = await (await fetch('http://localhost:9000/getMemberBoards')).json();
     // return boards;
