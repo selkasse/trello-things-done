@@ -38,8 +38,9 @@ const getBoards = async (id) => {
         body: JSON.stringify(data)
     }).then(response => {
         console.log(response.json());
+        return response.json();
     })
-    return 'mock response from getBoards';
+    // return 'mock response from getBoards';
 }
 
 let configParams;
