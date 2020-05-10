@@ -64,24 +64,18 @@ TrelloPowerUp.initialize({
         const currentBoard = t.getContext().board;
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard){
+            const isMaster = currentBoard === masterBoard;
             configParams = {
                 currentMember,
-                currentBoard,
-                masterBoard
+                isMaster
             };
-            await getBoards(currentMember)
-                .then(function(boards){
-                    console.log(boards);
-                })
-            // TODO : send config to getUserConfig()
-            /*
-            TODO : getUserConfig(configParams).then(
-                set isMaster
-                set enabledBoards
-            )
-            */
-            console.log(config);
-            console.log(currentMember, currentBoard, masterBoard);
+
+
+            // await getBoards(currentMember)
+            //     .then(function(boards){
+            //         console.log(boards);
+            //     })
+           
             return [{
                 icon: {
                     dark: MASTER_ICON_DARK,
@@ -95,27 +89,14 @@ TrelloPowerUp.initialize({
     },
     // only show card buttons if master board
     'card-buttons': async function (t, options) {
-        return t.get('member', 'shared', 'masterBoard')
-            .then(function (masterBoard) {
-                console.log(config);
-                // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
-                // const {currentMember, currentBoard} = t.getContext();
-                // const currentMember = t.getContext().member;
-                // console.log(currentMember);
-                // console.log(currentBoard);
-                // const currentBoard = t.getContext().board;
-                // const boardsConfig = {
-                //     currentBoard,
-                //     masterBoard
-                // };
-                // const userConfig = getUserConfig(boardsConfig);
-                const isMaster = currentBoard === masterBoard;
-                return [{
-                    icon: isMaster ? CHECK_MARK_ICON : null,
-                    text: isMaster ? 'GTD' : null,
-                    callback: onCardBtnClick
-                }];
-            })
+        
+        const {isMaster} = configParams;
+        return [{
+            icon: isMaster ? CHECK_MARK_ICON : null,
+            text: isMaster ? 'GTD' : null,
+            callback: onCardBtnClick
+        }];
+            
     },
     'card-badges': function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
