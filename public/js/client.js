@@ -69,7 +69,7 @@ const getEnabledBoards = async (boards) => {
         headers: {
             'Content-type': 'application/json; charset=UTF-8'
         },
-        body: JSON.stringify(boards)
+        body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(res => {
