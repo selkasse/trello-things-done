@@ -108,7 +108,7 @@ TrelloPowerUp.initialize({
             const formattedBoards = formatBoards(memberBoards);
             console.log(formattedBoards);
             
-            await getEnabledBoards(memberBoards)
+            await getEnabledBoards(formattedBoards)
             .then(function(boards){
                 enabledBoards = boards;
             })
