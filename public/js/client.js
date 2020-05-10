@@ -1,4 +1,3 @@
-const t = TrelloPowerUp.iframe();
 const Promise = TrelloPowerUp.Promise;
 
 const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png';
@@ -41,7 +40,7 @@ const onBoardBtnClick = function (t, options) {
     })
 }
 
-console.log(t.getContext());
+let config;
 
 TrelloPowerUp.initialize({
 
@@ -50,6 +49,12 @@ TrelloPowerUp.initialize({
         const currentBoard = t.getContext().board;
         return t.get('member', 'shared', 'masterBoard')
         .then(function (masterBoard){
+            config = {
+                currentMember,
+                currentBoard,
+                masterBoard
+            }
+            console.log(config);
             console.log(currentMember, currentBoard, masterBoard);
             return [{
                 icon: {
@@ -66,8 +71,9 @@ TrelloPowerUp.initialize({
     'card-buttons': async function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
+                console.log(config);
                 // TODO: move this call to 'board-buttons' to ensure the config triggers even if there are no cards
-                const {currentMember, currentBoard} = t.getContext();
+                // const {currentMember, currentBoard} = t.getContext();
                 // const currentMember = t.getContext().member;
                 // console.log(currentMember);
                 // console.log(currentBoard);
