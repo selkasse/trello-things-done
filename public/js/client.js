@@ -140,12 +140,12 @@ TrelloPowerUp.initialize({
 
         return t.get('card', 'shared', 'schedule')
             .then(function (schedule) {
-                if (isMaster){
+                // if (isMaster){
                     return [{
-                        icon: schedule ? CHECK_MARK_ICON : null,
-                        text: schedule ? schedule : null
+                        icon: schedule && isMaster ? CHECK_MARK_ICON : null,
+                        text: schedule && isMaster ? schedule : null
                     }];
-                }
+                // }
             });                
             // })
     },
