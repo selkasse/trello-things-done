@@ -62,22 +62,19 @@ TrelloPowerUp.initialize({
             .then(function(masterBoard){
                 const currentBoard = t.getContext().board;
                 const isMaster = currentBoard === masterBoard;
-                if (isMaster){
                     return t.get('card', 'shared', 'schedule')
                         .then(function (schedule) {
+                            if (isMaster){
+                                return [{
+                                    icon: schedule ? CHECK_MARK_ICON : null,
+                                    text: schedule ? schedule : null
+                                }];
+                            }
                             return [{
-                                icon: schedule ? CHECK_MARK_ICON : null,
-                                text: schedule ? schedule : null
+                                icon: CHECK_MARK_ICON,
+                                text: 'Scheduled from Master Board'
                             }];
-                        });
-                }
-         
-                return [{
-                    icon: CHECK_MARK_ICON,
-                    text: 'Scheduled from Master Board'
-                }];
-      
-                
+                        });                
             })
     },
     // only show card detail badges if master board
