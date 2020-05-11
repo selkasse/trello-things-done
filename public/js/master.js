@@ -10,9 +10,8 @@ window.master.addEventListener('submit', function (event) {
         });
 });
 
-const boards = JSON.parse(window.localStorage.getItem('config'));
-console.log(boards);
-// const boards = config.enabledBoards;
+const config = JSON.parse(window.localStorage.getItem('config'));
+const boards = config.enabledBoards;
 
 // * add the boards to the dropdown when master.html renders
 t.render(async function () {
