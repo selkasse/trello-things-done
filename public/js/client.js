@@ -87,7 +87,8 @@ TrelloPowerUp.initialize({
 
             isMaster = currentBoard === masterBoard;
 
-            console.log(isMaster);
+            console.log(currentBoard);
+            console.log(masterBoard);
 
             if(!config){
 
