@@ -95,8 +95,8 @@ TrelloPowerUp.initialize({
             
             // const isMaster = currentBoard === masterBoard;
             // console.log(currentMember);
-            console.log(`currentBoard: ${currentBoard}`);
-            console.log(`masterBoard: ${masterBoard}`);
+            // console.log(`currentBoard: ${currentBoard}`);
+            // console.log(`masterBoard: ${masterBoard}`);
 
                 await getBoards(currentMember)
                     .then(function (boards) {
@@ -104,6 +104,7 @@ TrelloPowerUp.initialize({
                     })
 
                 const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+                console.log(currentBoard);
 
                 await getEnabledBoards(memberBoards)
                     .then(function (boards) {
