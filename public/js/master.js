@@ -53,7 +53,7 @@ async function checkIfEnabled(id) {
 t.render(async function () {
     // console.log(window.localStorage.getItem('config'));
     const config = window.localStorage.getItem('config');
-    const boards = config.enabledBoards;
+    const boards = config["enabledBoards"];
     console.log(boards);
     console.log(config);
     t.sizeTo('#master').done();
