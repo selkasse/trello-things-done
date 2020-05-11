@@ -81,6 +81,7 @@ TrelloPowerUp.initialize({
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
+        console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
