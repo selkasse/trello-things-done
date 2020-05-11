@@ -79,13 +79,13 @@ TrelloPowerUp.initialize({
     'board-buttons': function (t, options) {
 
         // * initialize variables to be used for configParams
-        const currentMember = t.getContext().member;
-        const currentBoard = t.getContext().board;
         let memberBoards;
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
-            .then(async function (masterBoard) {
-
+        .then(async function (masterBoard) {
+            
+            const currentMember = t.getContext().member;
+            const currentBoard = t.getContext().board;
                 console.log(currentBoard);
                 console.log(masterBoard);
                 const isMaster = currentBoard === masterBoard;
