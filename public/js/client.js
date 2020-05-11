@@ -1,5 +1,3 @@
-// import axios from '/axios';
-
 const Promise = TrelloPowerUp.Promise;
 
 const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png';
@@ -41,10 +39,10 @@ const getBoards = async (id) => {
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => {
-        boards = res;
-    });
+        .then(res => res.json())
+        .then(res => {
+            boards = res;
+        });
     return boards;
 }
 
@@ -59,11 +57,11 @@ const getEnabledBoards = async (boards) => {
         },
         body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => {
-        console.log(res);
-        enabledBoards = res;
-    });
+        .then(res => res.json())
+        .then(res => {
+            console.log(res);
+            enabledBoards = res;
+        });
     // configParams.enabledBoards = enabledBoards;
     return enabledBoards;
 }
@@ -86,69 +84,65 @@ TrelloPowerUp.initialize({
         let memberBoards;
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
-        .then(async function (masterBoard){
+            .then(async function (masterBoard) {
 
-            const isMaster = currentBoard === masterBoard;
+                const isMaster = currentBoard === masterBoard;
 
-            // const config = JSON.parse(window.localStorage.getItem('config'));
-            
-            console.log(currentBoard);
-            console.log(masterBoard);
-            await getBoards(currentMember)
-            .then(function(boards){
-                memberBoards = boards;
-            })
-            
-            await getEnabledBoards(memberBoards)
-            .then(function(boards){
-                enabledBoards = boards;
-            })
-            
-            // * populate configParams when the board loads
-            configParams = {
-                currentMember,
-                isMaster,
-                enabledBoards
-            };
+                await getBoards(currentMember)
+                    .then(function (boards) {
+                        memberBoards = boards;
+                    })
 
-            // window.localStorage.setItem('config', JSON.stringify(configParams));
+                await getEnabledBoards(memberBoards)
+                    .then(function (boards) {
+                        enabledBoards = boards;
+                    })
 
-            return [{
-                icon: {
-                    dark: MASTER_ICON_DARK,
-                    light: MASTER_ICON_LIGHT
-                },
-                text: 'Master Board',
-                callback: onBoardBtnClick,
-                condition: 'edit'
-            }]
-        });
+                // * populate configParams when the board loads
+                configParams = {
+                    currentMember,
+                    isMaster,
+                    enabledBoards
+                };
+
+                window.localStorage.setItem('config', JSON.stringify(configParams));
+
+                return [{
+                    icon: {
+                        dark: MASTER_ICON_DARK,
+                        light: MASTER_ICON_LIGHT
+                    },
+                    text: 'Master Board',
+                    callback: onBoardBtnClick,
+                    condition: 'edit'
+                }]
+            });
     },
     // only show card buttons if master board
     'card-buttons': function (t, options) {
-        
-        const {isMaster} = configParams;
+
+        const { isMaster } = configParams;
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
             text: isMaster ? 'GTD' : null,
             callback: onCardBtnClick
         }];
-            
+
     },
     'card-badges': function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
-            .then(function(masterBoard){
+            .then(function (masterBoard) {
                 const currentBoard = t.getContext().board;
                 const isMaster = currentBoard === masterBoard;
-                    return t.get('card', 'shared', 'schedule')
-                        .then(function (schedule) {
-                            if (isMaster){
-                                return [{
-                                    icon: schedule ? CHECK_MARK_ICON : null,
-                                    text: schedule ? schedule : null
-                                }];
-                            }
-                        });                
+                return t.get('card', 'shared', 'schedule')
+                    .then(function (schedule) {
+                        if (isMaster) {
+                            return [{
+                                icon: schedule ? CHECK_MARK_ICON : null,
+                                text: schedule ? schedule : null
+                            }];
+                        }
+                    });
             })
     },
     // only show card detail badges if master board
@@ -172,5 +166,3 @@ TrelloPowerUp.initialize({
             })
     }
 });
-
-console.log(configParams);
