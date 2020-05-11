@@ -78,7 +78,7 @@ const getShortUrl = function(id, boards){
 // * isMaster
 // * memberBoards
 // * enabledBoards
-let isMaster;
+// let isMaster;
 
 
 TrelloPowerUp.initialize({
@@ -104,7 +104,7 @@ TrelloPowerUp.initialize({
             
             const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             console.log(currentBoard);
-            isMaster = currentBoard === masterBoard;
+            // isMaster = currentBoard === masterBoard;
 
                 await getEnabledBoards(memberBoards)
                     .then(function (boards) {
@@ -113,13 +113,13 @@ TrelloPowerUp.initialize({
                     })
 
                 // * populate configParams when the board loads
-                // configParams = {
-                //     currentMember,
-                //     isMaster,
-                //     enabledBoards
-                // };
+                configParams = {
+                    currentMember,
+                    memberBoards,
+                    enabledBoards
+                };
 
-                window.localStorage.setItem('config', JSON.stringify(enabledBoards));
+                window.localStorage.setItem('config', JSON.stringify(configParams));
 
                 return [{
                     icon: {
