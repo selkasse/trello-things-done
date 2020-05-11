@@ -11,8 +11,8 @@ window.master.addEventListener('submit', function (event) {
         });
 });
 
-// const config = JSON.parse(window.localStorage.getItem('config'));
-// const boards = config.enabledBoards;
+const config = JSON.parse(window.localStorage.getItem('config'));
+const boards = config.enabledBoards;
 
 // * add the boards to the dropdown when master.html renders
 t.render(async function () {
