@@ -90,8 +90,8 @@ TrelloPowerUp.initialize({
         console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
-        return t.get('member', 'shared', 'masterBoard')
-        .then(async function (masterBoard) {
+        // return t.get('member', 'shared', 'masterBoard')
+        // .then(async function (masterBoard) {
             
             // console.log(currentMember);
             // console.log(`currentBoard: ${currentBoard}`);
@@ -130,17 +130,22 @@ TrelloPowerUp.initialize({
                     callback: onBoardBtnClick,
                     condition: 'edit'
                 }]
-            });
+            // });
     },
     // only show card buttons if master board
     'card-buttons': function (t, options) {
 
         // const { isMaster } = configParams;
-        return [{
-            icon: isMaster ? CHECK_MARK_ICON : null,
-            text: isMaster ? 'GTD' : null,
-            callback: onCardBtnClick
-        }];
+        return t.get('member', 'shared', 'masterBoard')
+        .then(async function (masterBoard){
+            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            const isMaster = currentBoard === masterBoard;
+            return [{
+                icon: isMaster ? CHECK_MARK_ICON : null,
+                text: isMaster ? 'GTD' : null,
+                callback: onCardBtnClick
+            }];
+        });
 
     },
     'card-badges': function (t, options) {
