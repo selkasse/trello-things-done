@@ -58,6 +58,7 @@ t.render(async function () {
     // console.log(config);
     t.sizeTo('#master').done();
     const masterBoard = await t.get('member', 'shared', 'masterBoard');
+    console.log(masterBoard);
     const select = document.getElementById("masterBoard");
     for (let i = 0; i < boards.length; i++) {
         console.log(boards[i]);
