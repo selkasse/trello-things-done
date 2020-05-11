@@ -104,7 +104,6 @@ TrelloPowerUp.initialize({
             configParams = {
                 currentMember,
                 isMaster,
-                memberBoards,
                 enabledBoards
             };
 
