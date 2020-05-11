@@ -83,7 +83,7 @@ const getShortUrl = function(id, boards){
 
 TrelloPowerUp.initialize({
 
-    'board-buttons': function (t, options) {
+    'board-buttons': async function (t, options) {
 
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
