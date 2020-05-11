@@ -126,6 +126,7 @@ TrelloPowerUp.initialize({
     'card-buttons': function (t, options) {
         
         // const {isMaster} = configParams;
+        console.log(isMaster);
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
             text: isMaster ? 'GTD' : null,
