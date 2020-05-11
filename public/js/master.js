@@ -19,20 +19,20 @@ t.render(async function () {
     // console.log(boards);
     t.sizeTo('#master').done();
     const masterBoard = await t.get('member', 'shared', 'masterBoard');
-    // console.log(masterBoard);
+    console.log(masterBoard);
     const select = document.getElementById("masterBoard");
-    // for (let i = 0; i < boards.length; i++) {
-    //     console.log(boards[i]);
+    for (let i = 0; i < boards.length; i++) {
+        console.log(boards[i]);
 
-    //     const option = document.createElement("option");
-    //     // console.log(boards[i]);
-    //     option.value = boards[i].id;
-    //     option.text = boards[i].name;
-    //     if (masterBoard === boards[i].id) {
-    //         option.selected = true;
-    //         option.text += ' ✔️'
-    //     }
-    //     select.add(option);
-    // }
+        const option = document.createElement("option");
+        // console.log(boards[i]);
+        option.value = boards[i].shortUrl;
+        option.text = boards[i].name;
+        if (masterBoard === boards[i].shortUrl) {
+            option.selected = true;
+            option.text += ' ✔️'
+        }
+        select.add(option);
+    }
 
 })
