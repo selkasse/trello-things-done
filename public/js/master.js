@@ -59,8 +59,8 @@ t.render(async function () {
     t.sizeTo('#master').done();
     const masterBoard = await t.get('member', 'shared', 'masterBoard');
     const select = document.getElementById("masterBoard");
-    for (board in boards) {
-        console.log(board);
+    for (let i = 0; i < boards.length; i++) {
+        console.log(boards[i]);
       
             // const option = document.createElement("option");
             // option.value = boards[board].id;
