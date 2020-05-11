@@ -68,51 +68,49 @@ const getEnabledBoards = async (boards) => {
     return enabledBoards;
 }
 
+// holds the values for:
+// * currentMember
+// * isMaster
+// * memberBoards
+// * enabledBoards
+let configParams;
 
-let memberBoards;
-let enabledBoards;
-let isMaster;
-
-const config = JSON.parse(window.localStorage.getItem('config'));
-console.log(config);
 
 TrelloPowerUp.initialize({
 
     'board-buttons': function (t, options) {
 
+        // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
+        let memberBoards;
+        let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard){
 
-            isMaster = currentBoard === masterBoard;
+            const isMaster = currentBoard === masterBoard;
 
-            console.log(currentBoard);
-            console.log(masterBoard);
-
-            if(!config){
-
-                await getBoards(currentMember)
-                .then(function(boards){
-                    memberBoards = boards;
-                })
-                
-                await getEnabledBoards(memberBoards)
-                .then(function(boards){
-                    enabledBoards = boards;
-                })
-
-                // * populate configParams when the board loads
-                // configParams = {
-                //     currentMember,
-                //     isMaster,
-                //     enabledBoards
-                // };
-    
-                window.localStorage.setItem('config', JSON.stringify(enabledBoards));
-            }
+            const config = JSON.parse(window.localStorage.getItem('config'));
             
             
+            await getBoards(currentMember)
+            .then(function(boards){
+                memberBoards = boards;
+            })
+            
+            await getEnabledBoards(memberBoards)
+            .then(function(boards){
+                enabledBoards = boards;
+            })
+            
+            // * populate configParams when the board loads
+            configParams = {
+                currentMember,
+                isMaster,
+                enabledBoards
+            };
+
+            window.localStorage.setItem('config', JSON.stringify(configParams));
 
             return [{
                 icon: {
@@ -128,8 +126,7 @@ TrelloPowerUp.initialize({
     // only show card buttons if master board
     'card-buttons': function (t, options) {
         
-        // const {isMaster} = configParams;
-        console.log(isMaster);
+        const {isMaster} = configParams;
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
             text: isMaster ? 'GTD' : null,
