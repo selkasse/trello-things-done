@@ -109,7 +109,7 @@ TrelloPowerUp.initialize({
                     enabledBoards
                 };
 
-                window.localStorage.setItem('config', JSON.stringify(configParams));
+                // window.localStorage.setItem('config', JSON.stringify(configParams));
 
                 return [{
                     icon: {
