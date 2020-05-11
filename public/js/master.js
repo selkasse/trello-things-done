@@ -53,9 +53,9 @@ async function checkIfEnabled(id) {
 t.render(async function () {
     // console.log(window.localStorage.getItem('config'));
     const config = JSON.parse(window.localStorage.getItem('config'));
-    // const boards = config["enabledBoards"];
-    // console.log(boards);
-    console.log(config);
+    const boards = config.enabledBoards;
+    console.log(boards);
+    // console.log(config);
     t.sizeTo('#master').done();
     // const masterBoard = await t.get('member', 'shared', 'masterBoard');
     // const boards = await getMemberBoards();
