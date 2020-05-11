@@ -5,7 +5,8 @@ window.master.addEventListener('submit', function (event) {
     event.preventDefault();
     // * Set the master board
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value)
-        .then(function () {
+        .then(function (masterBoard) {
+            console.log(masterBoard)
             t.closePopup();
         });
 });
