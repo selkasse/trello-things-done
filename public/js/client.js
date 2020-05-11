@@ -93,18 +93,18 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard')
         .then(async function (masterBoard) {
             
-            // const isMaster = currentBoard === masterBoard;
             // console.log(currentMember);
             // console.log(`currentBoard: ${currentBoard}`);
             // console.log(`masterBoard: ${masterBoard}`);
-
-                await getBoards(currentMember)
-                    .then(function (boards) {
-                        memberBoards = boards;
-                    })
-
-                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-                console.log(currentBoard);
+            
+            await getBoards(currentMember)
+            .then(function (boards) {
+                memberBoards = boards;
+            })
+            
+            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            console.log(currentBoard);
+            isMaster = currentBoard === masterBoard;
 
                 await getEnabledBoards(memberBoards)
                     .then(function (boards) {
@@ -135,7 +135,7 @@ TrelloPowerUp.initialize({
     // only show card buttons if master board
     'card-buttons': function (t, options) {
 
-        const { isMaster } = configParams;
+        // const { isMaster } = configParams;
         return [{
             icon: isMaster ? CHECK_MARK_ICON : null,
             text: isMaster ? 'GTD' : null,
