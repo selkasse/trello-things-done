@@ -88,6 +88,9 @@ TrelloPowerUp.initialize({
 
                 const isMaster = currentBoard === masterBoard;
 
+                console.log(t.board);
+                // console.log(t.member);
+
                 await getBoards(currentMember)
                     .then(function (boards) {
                         memberBoards = boards;
