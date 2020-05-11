@@ -17,7 +17,6 @@ const boards = config.enabledBoards;
 // * add the boards to the dropdown when master.html renders
 t.render(async function () {
     // console.log(boards);
-    t.sizeTo('#master').done();
     const masterBoard = await t.get('member', 'shared', 'masterBoard');
     console.log(masterBoard);
     const select = document.getElementById("masterBoard");
@@ -34,5 +33,6 @@ t.render(async function () {
         }
         select.add(option);
     }
+    t.sizeTo('#master').done();
 
 })
