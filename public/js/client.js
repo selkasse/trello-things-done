@@ -92,7 +92,8 @@ TrelloPowerUp.initialize({
 
             const config = JSON.parse(window.localStorage.getItem('config'));
             
-            
+            console.log(currentBoard);
+            console.log(masterBoard);
             await getBoards(currentMember)
             .then(function(boards){
                 memberBoards = boards;
