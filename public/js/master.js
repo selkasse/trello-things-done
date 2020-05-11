@@ -24,7 +24,7 @@ t.render(async function () {
         console.log(boards[i]);
 
         const option = document.createElement("option");
-        option.value = boards[i].id;
+        option.value = boards[i].shortLink;
         option.text = boards[i].name;
         if (masterBoard === boards[i].id) {
             option.selected = true;
