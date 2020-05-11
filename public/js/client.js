@@ -66,12 +66,19 @@ const getEnabledBoards = async (boards) => {
     return enabledBoards;
 }
 
+const getShortUrl = function(id, boards){
+    console.log(boards);
+    const board = boards.find(board => board.id === id);
+    console.log(board);
+    return board.shortUrl;
+}
+
 // holds the values for:
 // * currentMember
 // * isMaster
 // * memberBoards
 // * enabledBoards
-let configParams;
+let isMaster;
 
 
 TrelloPowerUp.initialize({
@@ -80,22 +87,23 @@ TrelloPowerUp.initialize({
 
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
-        const currentBoard = t.getContext().board;
         console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
         return t.get('member', 'shared', 'masterBoard')
-            .then(async function (masterBoard) {
-
-                const isMaster = currentBoard === masterBoard;
-                // console.log(currentMember);
-                console.log(`currentBoard: ${currentBoard}`);
-                console.log(`masterBoard: ${masterBoard}`);
+        .then(async function (masterBoard) {
+            
+            const isMaster = currentBoard === masterBoard;
+            // console.log(currentMember);
+            console.log(`currentBoard: ${currentBoard}`);
+            console.log(`masterBoard: ${masterBoard}`);
 
                 await getBoards(currentMember)
                     .then(function (boards) {
                         memberBoards = boards;
                     })
+
+                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
 
                 await getEnabledBoards(memberBoards)
                     .then(function (boards) {
