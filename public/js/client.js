@@ -170,7 +170,8 @@ TrelloPowerUp.initialize({
     'card-detail-badges': function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
-                const currentBoard = t.getContext().board;
+                const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
                 const isMaster = currentBoard === masterBoard;
                 if (isMaster) {
 
