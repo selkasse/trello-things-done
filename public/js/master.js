@@ -51,7 +51,9 @@ async function checkIfEnabled(id) {
 
 // add the boards to the dropdown when master.html renders
 t.render(async function () {
-    console.log(window.localStorage.getItem('config'));
+    // console.log(window.localStorage.getItem('config'));
+    const { enabledBoards } = window.localStorage.getItem('config');
+    console.log(enabledBoards);
     t.sizeTo('#master').done();
     // const masterBoard = await t.get('member', 'shared', 'masterBoard');
     // const boards = await getMemberBoards();
