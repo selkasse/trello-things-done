@@ -62,15 +62,14 @@ t.render(async function () {
     for (let i = 0; i < boards.length; i++) {
         console.log(boards[i]);
       
-            // const option = document.createElement("option");
-            // option.value = boards[board].id;
-            // option.text = boards[board].name;
-            // if (masterBoard === boards[board].id) {
-            //     option.selected = true;
-            //     option.text += ' ✔️'
-            // // }
-            // select.add(option);
+        const option = document.createElement("option");
+        option.value = boards[i].id;
+        option.text = boards[i].name;
+        if (masterBoard === boards[i].id) {
+            option.selected = true;
+            option.text += ' ✔️'
         }
-    // }
+        select.add(option);
+    }
 
 })
