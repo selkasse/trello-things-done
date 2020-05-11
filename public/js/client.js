@@ -90,7 +90,7 @@ TrelloPowerUp.initialize({
 
             const isMaster = currentBoard === masterBoard;
 
-            const config = JSON.parse(window.localStorage.getItem('config'));
+            // const config = JSON.parse(window.localStorage.getItem('config'));
             
             console.log(currentBoard);
             console.log(masterBoard);
