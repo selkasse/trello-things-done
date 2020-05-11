@@ -11,6 +11,7 @@ window.master.addEventListener('submit', function (event) {
 });
 
 const boards = JSON.parse(window.localStorage.getItem('enabledBoards'));
+console.log(boards);
 // const boards = config.enabledBoards;
 
 // * add the boards to the dropdown when master.html renders
