@@ -138,8 +138,8 @@ TrelloPowerUp.initialize({
         // const { isMaster } = configParams;
         return t.get('member', 'shared', 'masterBoard')
         .then(function (masterBoard){
-            const config = JSON.parse(window.localStorage.getItem('config'));
-            const memberBoards = config.memberBoards;
+            // const config = JSON.parse(window.localStorage.getItem('config'));
+            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             console.log(currentBoard);
             console.log(masterBoard);
