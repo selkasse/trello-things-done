@@ -10,7 +10,7 @@ window.master.addEventListener('submit', function (event) {
         });
 });
 
-const boards = JSON.parse(window.localStorage.getItem('enabledBoards'));
+const boards = JSON.parse(window.localStorage.getItem('config'));
 console.log(boards);
 // const boards = config.enabledBoards;
 

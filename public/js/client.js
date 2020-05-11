@@ -73,7 +73,7 @@ let memberBoards;
 let enabledBoards;
 let isMaster;
 
-const config = JSON.parse(window.localStorage.getItem('enabledBoards'));
+const config = JSON.parse(window.localStorage.getItem('config'));
 console.log(config);
 
 TrelloPowerUp.initialize({
