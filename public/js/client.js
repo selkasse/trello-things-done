@@ -138,11 +138,8 @@ TrelloPowerUp.initialize({
         // const { isMaster } = configParams;
         return t.get('member', 'shared', 'masterBoard')
         .then(function (masterBoard){
-            // const config = JSON.parse(window.localStorage.getItem('config'));
             const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            console.log(currentBoard);
-            console.log(masterBoard);
             const isMaster = currentBoard === masterBoard;
             return [{
                 icon: isMaster ? CHECK_MARK_ICON : null,
@@ -155,7 +152,8 @@ TrelloPowerUp.initialize({
     'card-badges': function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
-                const currentBoard = t.getContext().board;
+                const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
                 const isMaster = currentBoard === masterBoard;
                 return t.get('card', 'shared', 'schedule')
                     .then(function (schedule) {
