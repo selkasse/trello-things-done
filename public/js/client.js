@@ -91,6 +91,7 @@ TrelloPowerUp.initialize({
                 memberBoards = boards;
             })
             
+            // TODO: in master.js, only add to the dropdown if cron is false
             await getEnabledBoards(memberBoards)
                 .then(function (boards) {
                     console.log(boards);
