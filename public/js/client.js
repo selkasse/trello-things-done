@@ -90,46 +90,45 @@ TrelloPowerUp.initialize({
         console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
-        // return t.get('member', 'shared', 'masterBoard')
-        // .then(async function (masterBoard) {
-            
-            // console.log(currentMember);
-            // console.log(`currentBoard: ${currentBoard}`);
-            // console.log(`masterBoard: ${masterBoard}`);
-            
+ 
+        // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+        // console.log(currentBoard);
+        // isMaster = currentBoard === masterBoard;
+
+        if (!window.localStorage.getItem('config')){
+
             await getBoards(currentMember)
             .then(function (boards) {
                 memberBoards = boards;
             })
             
-            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            console.log(currentBoard);
-            // isMaster = currentBoard === masterBoard;
+    
+            await getEnabledBoards(memberBoards)
+                .then(function (boards) {
+                    console.log(boards);
+                    enabledBoards = boards;
+                })
+    
+            // * populate configParams when the board loads
+            configParams = {
+                currentMember,
+                memberBoards,
+                enabledBoards
+            };
+    
+            window.localStorage.setItem('config', JSON.stringify(configParams));
+        }
+            
 
-                await getEnabledBoards(memberBoards)
-                    .then(function (boards) {
-                        console.log(boards);
-                        enabledBoards = boards;
-                    })
-
-                // * populate configParams when the board loads
-                configParams = {
-                    currentMember,
-                    memberBoards,
-                    enabledBoards
-                };
-
-                window.localStorage.setItem('config', JSON.stringify(configParams));
-
-                return [{
-                    icon: {
-                        dark: MASTER_ICON_DARK,
-                        light: MASTER_ICON_LIGHT
-                    },
-                    text: 'Master Board',
-                    callback: onBoardBtnClick,
-                    condition: 'edit'
-                }]
+        return [{
+            icon: {
+                dark: MASTER_ICON_DARK,
+                light: MASTER_ICON_LIGHT
+            },
+            text: 'Master Board',
+            callback: onBoardBtnClick,
+            condition: 'edit'
+        }]
             // });
     },
     // only show card buttons if master board
