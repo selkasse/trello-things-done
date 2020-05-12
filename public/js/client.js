@@ -19,7 +19,8 @@ const onBoardBtnClick = function (t, options) {
     })
 }
 
-
+// ! DO NOT DELETE
+// !!!!!!!!!!!!!!!
 // const getID = async () => {
 //     const ID = await (await fetch('http://localhost:9000/getMemberID')).json();
 //     return ID;
@@ -29,7 +30,10 @@ const onBoardBtnClick = function (t, options) {
 //     const h2 = document.getElementById('member');
 //     h2.innerHTML += ` ${id}`;
 // })
+// !!!!!!!!!!!!!!!
+// ! DO NOT DELETE
 const getBoards = async (id) => {
+    console.log('inside getBoards');
     const data = { memberID: id };
     let boards;
     await fetch('/.netlify/functions/getMemberBoards', {
@@ -47,6 +51,8 @@ const getBoards = async (id) => {
 }
 
 const getEnabledBoards = async (boards) => {
+    console.log('inside getEnabledBoards');
+
     console.log(boards);
     const data = { boards }
     let enabledBoards;
@@ -59,27 +65,15 @@ const getEnabledBoards = async (boards) => {
     })
         .then(res => res.json())
         .then(res => {
-            // console.log(res);
             enabledBoards = res;
         });
-    // configParams.enabledBoards = enabledBoards;
     return enabledBoards;
 }
 
 const getShortUrl = function(id, boards){
-    console.log(boards);
     const board = boards.find(board => board.id === id);
-    console.log(board);
     return board.shortUrl;
 }
-
-// holds the values for:
-// * currentMember
-// * isMaster
-// * memberBoards
-// * enabledBoards
-// let isMaster;
-
 
 TrelloPowerUp.initialize({
 
@@ -87,13 +81,8 @@ TrelloPowerUp.initialize({
 
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
-        console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
- 
-        // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-        // console.log(currentBoard);
-        // isMaster = currentBoard === masterBoard;
 
         if (!window.localStorage.getItem('config')){
 
@@ -102,7 +91,6 @@ TrelloPowerUp.initialize({
                 memberBoards = boards;
             })
             
-    
             await getEnabledBoards(memberBoards)
                 .then(function (boards) {
                     console.log(boards);
@@ -118,8 +106,6 @@ TrelloPowerUp.initialize({
     
             window.localStorage.setItem('config', JSON.stringify(configParams));
         }
-            
-
         return [{
             icon: {
                 dark: MASTER_ICON_DARK,
@@ -129,12 +115,9 @@ TrelloPowerUp.initialize({
             callback: onBoardBtnClick,
             condition: 'edit'
         }]
-            // });
     },
-    // only show card buttons if master board
+    // * only show card buttons if master board
     'card-buttons': function (t, options) {
-
-        // const { isMaster } = configParams;
         return t.get('member', 'shared', 'masterBoard')
         .then(function (masterBoard){
             const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
@@ -165,7 +148,7 @@ TrelloPowerUp.initialize({
                     });
             })
     },
-    // only show card detail badges if master board
+    // * only show card detail badges if master board
     'card-detail-badges': function (t, options) {
         return t.get('member', 'shared', 'masterBoard')
             .then(function (masterBoard) {
