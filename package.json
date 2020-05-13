@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "circular-json": "^0.5.9",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "flatted": "^2.0.2",
     "netlify-lambda": "^1.6.3",
     "node-cron": "^2.0.3"
   }
