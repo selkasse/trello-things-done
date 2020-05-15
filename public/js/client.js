@@ -1,23 +1,23 @@
-const Promise = TrelloPowerUp.Promise;
+// eslint-disable-next-line no-undef
+const { Promise } = TrelloPowerUp;
 
 const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png';
 const MASTER_ICON_DARK = 'https://img.icons8.com/material/96/000000/master.png';
 const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/master.png';
 
-
-const onCardBtnClick = function (t, options) {
+const onCardBtnClick = function(t) {
     return t.popup({
         title: 'Add to future board',
-        url: '/public/schedule.html'
+        url: '/public/schedule.html',
     });
-}
+};
 
-const onBoardBtnClick = function (t, options) {
+const onBoardBtnClick = function(t) {
     return t.popup({
         title: 'Change Master Board',
-        url: '/public/master.html'
-    })
-}
+        url: '/public/master.html',
+    });
+};
 
 // ! DO NOT DELETE
 // !!!!!!!!!!!!!!!
@@ -32,142 +32,139 @@ const onBoardBtnClick = function (t, options) {
 // })
 // !!!!!!!!!!!!!!!
 // ! DO NOT DELETE
-const getBoards = async (id) => {
+const getBoards = async id => {
     console.log('inside getBoards');
     const data = { memberID: id };
     let boards;
     await fetch('/.netlify/functions/getMemberBoards', {
-        method: "POST",
+        method: 'POST',
         headers: {
-            'Content-type': 'application/json; charset=UTF-8'
+            'Content-type': 'application/json; charset=UTF-8',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
         .then(res => res.json())
         .then(res => {
             boards = res;
         });
     return boards;
-}
+};
 
-const getEnabledBoards = async (boards) => {
+const getEnabledBoards = async boards => {
     console.log('inside getEnabledBoards');
 
     console.log(boards);
-    const data = { boards }
+    const data = { boards };
     let enabledBoards;
     await fetch('/.netlify/functions/getEnabledBoards', {
-        method: "POST",
+        method: 'POST',
         headers: {
-            'Content-type': 'application/json; charset=UTF-8'
+            'Content-type': 'application/json; charset=UTF-8',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
         .then(res => res.json())
         .then(res => {
             enabledBoards = res;
         });
     return enabledBoards;
-}
+};
 
-const getShortUrl = function(id, boards){
-    const board = boards.find(board => board.id === id);
+const getShortUrl = function(id, boards) {
+    const board = boards.find(foundBoard => foundBoard.id === id);
     return board.shortUrl;
-}
+};
 
+// eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
-
-    'board-buttons': async function (t, options) {
-
+    'board-buttons': async function(t) {
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
         let memberBoards;
         let enabledBoards;
 
-        if (!window.localStorage.getItem('config')){
-
-            await getBoards(currentMember)
-            .then(function (boards) {
+        if (!window.localStorage.getItem('config')) {
+            await getBoards(currentMember).then(function(boards) {
                 memberBoards = boards;
-            })
-            
+            });
+
             // TODO: in master.js, only add to the dropdown if cron is false
-            await getEnabledBoards(memberBoards)
-                .then(function (boards) {
-                    console.log(boards);
-                    enabledBoards = boards;
-                })
-    
+            await getEnabledBoards(memberBoards).then(function(boards) {
+                console.log(boards);
+                enabledBoards = boards;
+            });
+
             // * populate configParams when the board loads
-            configParams = {
+            const configParams = {
                 currentMember,
                 memberBoards,
-                enabledBoards
+                enabledBoards,
             };
-    
+
             window.localStorage.setItem('config', JSON.stringify(configParams));
         }
-        return [{
-            icon: {
-                dark: MASTER_ICON_DARK,
-                light: MASTER_ICON_LIGHT
+        return [
+            {
+                icon: {
+                    dark: MASTER_ICON_DARK,
+                    light: MASTER_ICON_LIGHT,
+                },
+                text: 'Master Board',
+                callback: onBoardBtnClick,
+                condition: 'edit',
             },
-            text: 'Master Board',
-            callback: onBoardBtnClick,
-            condition: 'edit'
-        }]
+        ];
     },
     // * only show card buttons if master board
-    'card-buttons': function (t, options) {
-        return t.get('member', 'shared', 'masterBoard')
-        .then(function (masterBoard){
+    'card-buttons': function(t) {
+        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
             const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             const isMaster = currentBoard === masterBoard;
-            return [{
-                icon: isMaster ? CHECK_MARK_ICON : null,
-                text: isMaster ? 'GTD' : null,
-                callback: onCardBtnClick
-            }];
+            return [
+                {
+                    icon: isMaster ? CHECK_MARK_ICON : null,
+                    text: isMaster ? 'GTD' : null,
+                    callback: onCardBtnClick,
+                },
+            ];
         });
-
     },
-    'card-badges': function (t, options) {
-        return t.get('member', 'shared', 'masterBoard')
-            .then(function (masterBoard) {
-                const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-                const isMaster = currentBoard === masterBoard;
-                return t.get('card', 'shared', 'schedule')
-                    .then(function (schedule) {
-                        if (isMaster) {
-                            return [{
-                                icon: schedule ? CHECK_MARK_ICON : null,
-                                text: schedule ? schedule : null
-                            }];
-                        }
-                    });
-            })
+    'card-badges': function(t) {
+        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
+            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            const isMaster = currentBoard === masterBoard;
+            return t.get('card', 'shared', 'schedule').then(function(schedule) {
+                if (isMaster) {
+                    return [
+                        {
+                            icon: schedule ? CHECK_MARK_ICON : null,
+                            text: schedule || null,
+                        },
+                    ];
+                }
+            });
+        });
     },
     // * only show card detail badges if master board
-    'card-detail-badges': function (t, options) {
-        return t.get('member', 'shared', 'masterBoard')
-            .then(function (masterBoard) {
-                const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-                const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-                const isMaster = currentBoard === masterBoard;
-                if (isMaster) {
-
-                    return t.get('card', 'shared', 'schedule')
-                        .then(function (schedule) {
-                            return [{
-                                title: 'Schedule',
-                                color: schedule ? 'green' : 'blue',
-                                text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
-                                callback: onCardBtnClick
-                            }]
-                        })
-                }
-            })
-    }
+    'card-detail-badges': function(t) {
+        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
+            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            const isMaster = currentBoard === masterBoard;
+            if (isMaster) {
+                return t.get('card', 'shared', 'schedule').then(function(schedule) {
+                    return [
+                        {
+                            title: 'Schedule',
+                            color: schedule ? 'green' : 'blue',
+                            text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
+                            callback: onCardBtnClick,
+                        },
+                    ];
+                });
+            }
+        });
+    },
 });
