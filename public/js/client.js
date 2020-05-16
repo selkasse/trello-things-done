@@ -106,6 +106,7 @@ TrelloPowerUp.initialize({
 
         console.log(cron);
         if (!cron) {
+            console.log('inside cron block in board-buttons');
             await initDailyBoards(currentMember);
             await t.set('organization', 'shared', 'cron', true).catch(e => console.log(e));
         }

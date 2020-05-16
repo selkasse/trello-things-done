@@ -25,7 +25,7 @@ t.render(async function() {
     } catch (e) {
         console.log(e);
     }
-    console.log(boards);
+    // console.log(boards);
     const select = document.getElementById('masterBoard');
     boards.forEach(board => {
         const option = document.createElement('option');
