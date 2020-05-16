@@ -155,11 +155,11 @@ TrelloPowerUp.initialize({
     'card-buttons': function(t) {
         return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-            console.log(memberBoards);
-            const splitMaster = masterBoard.split(',');
-            const { shortUrl, id } = splitMaster;
-            console.log(shortUrl);
-            console.log(id);
+            // console.log(memberBoards);
+            // const splitMaster = masterBoard.split(',');
+            // const { shortUrl, id } = splitMaster;
+            // console.log(shortUrl);
+            console.log(masterBoard);
             // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             // console.log(masterBoard);
             // console.log(currentBoard);
