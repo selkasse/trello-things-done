@@ -20,7 +20,8 @@ t.render(async function() {
 
     try {
         const configResponse = await t.get('organization', 'shared', 'config', 'not set');
-        boards = JSON.stringify(configResponse);
+        // boards = JSON.stringify(configResponse);
+        boards = configResponse;
     } catch (e) {
         console.log(e);
     }
