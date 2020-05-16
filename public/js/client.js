@@ -87,15 +87,15 @@ const getShortUrl = function(id, boards) {
     return board.shortUrl;
 };
 
+let memberBoards;
+let enabledBoards;
+let config;
+let cron;
 // eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
         // * initialize variables to be used for configParams
         const currentMember = t.getContext().member;
-        let memberBoards;
-        let enabledBoards;
-        let config;
-        let cron;
 
         try {
             cron = await t.get('organization', 'shared', 'cron', false);
@@ -154,7 +154,8 @@ TrelloPowerUp.initialize({
     // * only show card buttons if master board
     'card-buttons': function(t) {
         return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
-            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            console.log(memberBoards);
             const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             console.log(masterBoard);
             console.log(currentBoard);
