@@ -87,14 +87,14 @@ const getShortUrl = function(id, boards) {
     return board.shortUrl;
 };
 
-let memberBoards;
-let enabledBoards;
-let config;
-let cron;
 // eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
         // * initialize variables to be used for configParams
+        let memberBoards;
+        let enabledBoards;
+        let config;
+        let cron;
         const currentMember = t.getContext().member;
 
         try {
