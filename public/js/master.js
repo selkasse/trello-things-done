@@ -32,6 +32,7 @@ t.render(async function() {
         option.value = board.shortUrl;
         if (masterBoard === board.shortUrl) {
             option.selected = true;
+            option.text = board.name;
             option.text += ' ✔️';
         }
         select.add(option);
