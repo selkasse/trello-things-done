@@ -33,7 +33,7 @@ const onBoardBtnClick = function(t) {
 // !!!!!!!!!!!!!!!
 // ! DO NOT DELETE
 const getBoards = async id => {
-    // console.log('inside getBoards');
+    console.log('inside getBoards');
     const data = { memberID: id };
     let boards;
     await fetch('/.netlify/functions/getMemberBoards', {
@@ -51,7 +51,7 @@ const getBoards = async id => {
 };
 
 const getEnabledBoards = async boards => {
-    // console.log('inside getEnabledBoards');
+    console.log('inside getEnabledBoards');
 
     // console.log(boards);
     const data = { boards };
@@ -90,7 +90,7 @@ TrelloPowerUp.initialize({
         } catch (e) {
             console.log(e);
         }
-        console.log(config);
+        // console.log(config);
         if (config !== 'not set') {
             await getBoards(currentMember).then(function(boards) {
                 memberBoards = boards;
