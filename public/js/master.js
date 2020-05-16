@@ -30,9 +30,9 @@ t.render(async function() {
     boards.forEach(board => {
         const option = document.createElement('option');
         option.value = board.shortUrl;
+        option.text = board.name;
         if (masterBoard === board.shortUrl) {
             option.selected = true;
-            option.text = board.name;
             option.text += ' ✔️';
         }
         select.add(option);
