@@ -5,7 +5,7 @@ window.master.addEventListener('submit', function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
     // * Set the master board
-    const splitValue = window.masterboard.value.split(',');
+    const splitValue = window.masterBoard.value.split(',');
     console.log(splitValue);
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value).then(function() {
         console.log(window.masterBoard.value);
