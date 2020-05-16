@@ -70,6 +70,18 @@ const getEnabledBoards = async boards => {
     return enabledBoards;
 };
 
+const initDailyBoards = async id => {
+    console.log('init daily boards in client.js');
+    const data = { memberID: id };
+    await fetch('/.netlify/functions/makeDailyBoards', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data),
+    }).catch(e => console.log(e));
+};
+
 const getShortUrl = function(id, boards) {
     const board = boards.find(foundBoard => foundBoard.id === id);
     return board.shortUrl;
@@ -83,6 +95,20 @@ TrelloPowerUp.initialize({
         let memberBoards;
         let enabledBoards;
         let config;
+        let cron;
+
+        try {
+            const cronResponse = await t.get('organization', 'shared', 'cron', false);
+            cron = JSON.stringify(cronResponse);
+        } catch (e) {
+            console.log(e);
+        }
+
+        console.log(cron);
+        if (!cron) {
+            await initDailyBoards(currentMember);
+            await t.set('organization', 'shared', 'cron', true).catch(e => console.log(e));
+        }
 
         try {
             const configResponse = await t.get('organization', 'shared', 'config', 'not set');
