@@ -157,7 +157,8 @@ TrelloPowerUp.initialize({
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             // console.log(memberBoards);
             const splitMaster = masterBoard.split(',');
-            const { shortUrl, id } = splitMaster;
+            const shortUrl = splitMaster[0];
+            const id = splitMaster[1];
             console.log(shortUrl);
             console.log(id);
             // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
