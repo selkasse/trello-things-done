@@ -82,6 +82,13 @@ TrelloPowerUp.initialize({
         const currentMember = t.getContext().member;
         let memberBoards;
         let enabledBoards;
+
+        try {
+            const config = await t.get('organization', 'shared', 'config', 'not set');
+            console.log(JSON.stringify(config));
+        } catch (e) {
+            console.log(e);
+        }
         console.log(t.get('organization', 'shared', 'config'));
         // if (!window.localStorage.getItem('config')) {
         await getBoards(currentMember).then(function(boards) {
@@ -101,7 +108,7 @@ TrelloPowerUp.initialize({
             enabledBoards,
         };
 
-        t.set('organization', 'shared', 'config', enabledBoards);
+        await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
         window.localStorage.setItem('config', JSON.stringify(configParams));
         // }
         return [
