@@ -82,27 +82,28 @@ TrelloPowerUp.initialize({
         const currentMember = t.getContext().member;
         let memberBoards;
         let enabledBoards;
+        console.log(t.get('organization', 'shared', 'config'));
+        // if (!window.localStorage.getItem('config')) {
+        await getBoards(currentMember).then(function(boards) {
+            memberBoards = boards;
+        });
 
-        if (!window.localStorage.getItem('config')) {
-            await getBoards(currentMember).then(function(boards) {
-                memberBoards = boards;
-            });
+        // TODO: in master.js, only add to the dropdown if cron is false
+        await getEnabledBoards(memberBoards).then(function(boards) {
+            console.log(boards);
+            enabledBoards = boards;
+        });
 
-            // TODO: in master.js, only add to the dropdown if cron is false
-            await getEnabledBoards(memberBoards).then(function(boards) {
-                console.log(boards);
-                enabledBoards = boards;
-            });
+        // * populate configParams when the board loads
+        const configParams = {
+            currentMember,
+            memberBoards,
+            enabledBoards,
+        };
 
-            // * populate configParams when the board loads
-            const configParams = {
-                currentMember,
-                memberBoards,
-                enabledBoards,
-            };
-
-            window.localStorage.setItem('config', JSON.stringify(configParams));
-        }
+        t.set('organization', 'shared', 'config', configParams);
+        window.localStorage.setItem('config', JSON.stringify(configParams));
+        // }
         return [
             {
                 icon: {
