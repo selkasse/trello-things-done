@@ -101,7 +101,7 @@ TrelloPowerUp.initialize({
             enabledBoards,
         };
 
-        t.set('organization', 'shared', 'config', configParams);
+        t.set('organization', 'shared', 'config', enabledBoards);
         window.localStorage.setItem('config', JSON.stringify(configParams));
         // }
         return [
