@@ -33,7 +33,7 @@ const onBoardBtnClick = function(t) {
 // !!!!!!!!!!!!!!!
 // ! DO NOT DELETE
 const getBoards = async id => {
-    console.log('inside getBoards');
+    // console.log('inside getBoards');
     const data = { memberID: id };
     let boards;
     await fetch('/.netlify/functions/getMemberBoards', {
@@ -51,9 +51,9 @@ const getBoards = async id => {
 };
 
 const getEnabledBoards = async boards => {
-    console.log('inside getEnabledBoards');
+    // console.log('inside getEnabledBoards');
 
-    console.log(boards);
+    // console.log(boards);
     const data = { boards };
     let enabledBoards;
     await fetch('/.netlify/functions/getEnabledBoards', {
@@ -82,35 +82,35 @@ TrelloPowerUp.initialize({
         const currentMember = t.getContext().member;
         let memberBoards;
         let enabledBoards;
+        let config;
 
         try {
-            const config = await t.get('organization', 'shared', 'config', 'not set');
-            console.log(JSON.stringify(config));
+            const configResponse = await t.get('organization', 'shared', 'config', 'not set');
+            config = JSON.stringify(configResponse);
         } catch (e) {
             console.log(e);
         }
-        console.log(t.get('organization', 'shared', 'config'));
-        // if (!window.localStorage.getItem('config')) {
-        await getBoards(currentMember).then(function(boards) {
-            memberBoards = boards;
-        });
+        if (config !== 'not set') {
+            await getBoards(currentMember).then(function(boards) {
+                memberBoards = boards;
+            });
 
-        // TODO: in master.js, only add to the dropdown if cron is false
-        await getEnabledBoards(memberBoards).then(function(boards) {
-            console.log(boards);
-            enabledBoards = boards;
-        });
+            // TODO: in master.js, only add to the dropdown if cron is false
+            await getEnabledBoards(memberBoards).then(function(boards) {
+                // console.log(boards);
+                enabledBoards = boards;
+            });
 
-        // * populate configParams when the board loads
-        const configParams = {
-            currentMember,
-            memberBoards,
-            enabledBoards,
-        };
+            // * populate configParams when the board loads
+            const configParams = {
+                currentMember,
+                memberBoards,
+                enabledBoards,
+            };
 
-        await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
-        window.localStorage.setItem('config', JSON.stringify(configParams));
-        // }
+            await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
+            // window.localStorage.setItem('config', JSON.stringify(configParams));
+        }
         return [
             {
                 icon: {
