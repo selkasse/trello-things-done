@@ -156,17 +156,17 @@ TrelloPowerUp.initialize({
         return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             console.log(memberBoards);
-            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            console.log(masterBoard);
-            console.log(currentBoard);
-            const isMaster = currentBoard === masterBoard;
-            return [
-                {
-                    icon: isMaster ? CHECK_MARK_ICON : null,
-                    text: isMaster ? 'GTD' : null,
-                    callback: onCardBtnClick,
-                },
-            ];
+            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            // console.log(masterBoard);
+            // console.log(currentBoard);
+            // const isMaster = currentBoard === masterBoard;
+            // return [
+            //     {
+            //         icon: isMaster ? CHECK_MARK_ICON : null,
+            //         text: isMaster ? 'GTD' : null,
+            //         callback: onCardBtnClick,
+            //     },
+            // ];
         });
     },
     'card-badges': function(t) {
