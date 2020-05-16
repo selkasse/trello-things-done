@@ -24,18 +24,28 @@ t.render(async function() {
     } catch (e) {
         console.log(e);
     }
+    console.log(boards);
     const select = document.getElementById('masterBoard');
-    for (let i = 0; i < boards.length; i += 1) {
-        console.log(boards[i]);
-
+    boards.forEach(board => {
         const option = document.createElement('option');
-        option.value = boards[i].shortUrl;
-        option.text = boards[i].name;
-        if (masterBoard === boards[i].shortUrl) {
+        option.value = board.shortUrl;
+        if (masterBoard === board.shortUrl) {
             option.selected = true;
             option.text += ' ✔️';
         }
         select.add(option);
-    }
+    });
     t.sizeTo('#master').done();
+    // for (let i = 0; i < boards.length; i += 1) {
+    //     // console.log(boards[i]);
+
+    //     const option = document.createElement('option');
+    //     option.value = boards[i].shortUrl;
+    //     option.text = boards[i].name;
+    //     if (masterBoard === boards[i].shortUrl) {
+    //         option.selected = true;
+    //         option.text += ' ✔️';
+    //     }
+    //     select.add(option);
+    // }
 });
