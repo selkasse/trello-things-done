@@ -5,6 +5,8 @@ window.master.addEventListener('submit', function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
     // * Set the master board
+    const splitValue = window.masterboard.value.split(',');
+    console.log(splitValue);
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value).then(function() {
         console.log(window.masterBoard.value);
         t.closePopup();
@@ -29,7 +31,7 @@ t.render(async function() {
     const select = document.getElementById('masterBoard');
     boards.forEach(board => {
         const option = document.createElement('option');
-        option.value = board.shortUrl;
+        option.value = `${board.shortUrl},${board.id}`;
         option.text = board.name;
         if (masterBoard === board.shortUrl) {
             option.selected = true;
