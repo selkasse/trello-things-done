@@ -90,6 +90,7 @@ TrelloPowerUp.initialize({
         } catch (e) {
             console.log(e);
         }
+        console.log(config);
         if (config !== 'not set') {
             await getBoards(currentMember).then(function(boards) {
                 memberBoards = boards;
