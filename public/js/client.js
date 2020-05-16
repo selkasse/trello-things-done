@@ -98,8 +98,8 @@ TrelloPowerUp.initialize({
         let cron;
 
         try {
-            const cronResponse = await t.get('organization', 'shared', 'cron', false);
-            cron = JSON.stringify(cronResponse);
+            cron = await t.get('organization', 'shared', 'cron', false);
+            // cron = JSON.stringify(cronResponse);
         } catch (e) {
             console.log(e);
         }
