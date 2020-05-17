@@ -1,0 +1,14 @@
+name: Cron # Name of our workflow
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest # Environment job will run in
+
+    steps: # Each action/command to run
+    - uses: actions/checkout@v1 # Helps check out the repo code
+    - uses: ./.github/actions/daily-action # Tell it to run out JS Action
