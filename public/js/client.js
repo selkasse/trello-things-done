@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from '../../node_modules/moment';
 
 // eslint-disable-next-line no-undef
 const { Promise } = TrelloPowerUp;
