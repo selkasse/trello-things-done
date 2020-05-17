@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: call makeDailyBoards
-        uses: ./actions/action.yml
+        uses: ./actions
 
 
         #Per 'learn with jason' video, the 'uses' here should point to where the action.yml lives
