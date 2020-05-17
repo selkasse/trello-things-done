@@ -3,4 +3,4 @@ description: "Use a cron job via GitHub actions"
 
 runs:
   using: "node12"
-  main: "./actions/index.js"
+  main: "dist/index.js"
