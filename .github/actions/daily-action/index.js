@@ -15,20 +15,23 @@ const callNetlify = async () => {
         '\x1b[0m'
     );
     try {
-        // const scheduleResponse = await axios.post(
-        //     'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',
-        //     { memberID: TRELLO_MEMBER }
-        // );
-        // console.log(scheduleResponse);
-        fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
-            method: 'post',
-            // body: JSON.stringify({
-            //     memberId: TRELLO_MEMBER
-            // }),
-            headers: { 'Content-Type': 'application/json' },
-        })
-            .then(res => res.json())
-            .then(json => console.log(json));
+        const scheduleResponse = await axios.post(
+            'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
+        );
+        console.log(
+            '\x1b[41m',
+            `scheduleResponse: ${scheduleResponse}`,
+            '\x1b[0m'
+        );
+        // fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
+        //     method: 'post',
+        //     // body: JSON.stringify({
+        //     //     memberId: TRELLO_MEMBER
+        //     // }),
+        //     headers: { 'Content-Type': 'application/json' },
+        // })
+        //     .then(res => res.json())
+        //     .then(json => console.log(json));
     } catch (e) {
         console.log(e);
     }
