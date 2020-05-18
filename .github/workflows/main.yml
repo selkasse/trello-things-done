@@ -10,5 +10,5 @@ jobs:
 
     steps: # Each action/command to run
       - uses: actions/checkout@v1 # Helps check out the repo code
-      - uses: ./.github/actions/daily-action # Tell it to run out JS Action
+      - uses: ./.github/actions/daily-action # Tell it to run our JS Action
 
