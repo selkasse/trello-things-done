@@ -11,5 +11,5 @@ jobs:
     steps: # Each action/command to run
       - uses: actions/checkout@v1 # Helps check out the repo code
       - uses: ./.github/actions/daily-action # Tell it to run out JS Action
-        env:
-          TRELLO_MEMBER: 5c4b60877d421272511a4a80
+        # env:
+        #   TRELLO_MEMBER: 5c4b60877d421272511a4a80

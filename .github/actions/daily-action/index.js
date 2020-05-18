@@ -22,9 +22,9 @@ const callNetlify = async () => {
         // console.log(scheduleResponse);
         fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
             method: 'post',
-            body: JSON.stringify({
-                memberId: TRELLO_MEMBER
-            }),
+            // body: JSON.stringify({
+            //     memberId: TRELLO_MEMBER
+            // }),
             headers: { 'Content-Type': 'application/json' },
         })
             .then(res => res.json())
