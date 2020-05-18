@@ -4,6 +4,7 @@
     //* https://help.github.com/en/actions/building-actions/creating-a-javascript-action
 */
 const axios = require('axios');
+const fetch = require('node-fetch');
 
 
 const { TRELLO_MEMBER } = process.env;
@@ -14,11 +15,20 @@ const callNetlify = async () => {
         '\x1b[0m'
     );
     try {
-        const scheduleResponse = await axios.post(
-            'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',
-            { memberID: TRELLO_MEMBER }
-        );
-        console.log(scheduleResponse);
+        // const scheduleResponse = await axios.post(
+        //     'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',
+        //     { memberID: TRELLO_MEMBER }
+        // );
+        // console.log(scheduleResponse);
+        fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
+            method: 'post',
+            body: JSON.stringify({
+                memberId: TRELLO_MEMBER
+            }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+            .then(res => res.json())
+            .then(json => console.log(json));
     } catch (e) {
         console.log(e);
     }
