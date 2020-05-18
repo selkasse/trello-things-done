@@ -15,14 +15,14 @@ const callNetlify = async () => {
         '\x1b[0m'
     );
     try {
-        const scheduleResponse = await axios.post(
+        await axios.post(
             'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
-        );
-        console.log(
-            '\x1b[41m',
-            `scheduleResponse: ${scheduleResponse}`,
-            '\x1b[0m'
-        );
+        ).then(res => console.log(res)).catch(e => console.log(e))
+        // console.log(
+        //     '\x1b[41m',
+        //     `scheduleResponse: ${scheduleResponse}`,
+        //     '\x1b[0m'
+        // );
         // fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
         //     method: 'post',
         //     // body: JSON.stringify({
@@ -38,3 +38,4 @@ const callNetlify = async () => {
 };
 
 callNetlify();
+

@@ -1,8 +1,8 @@
 name: Cron # Name of our workflow
 
-# on:
-#   schedule:
-#     - cron: "* * * * *"
+on:
+  schedule:
+    - cron: "* * * * *"
 
 jobs:
   build:
