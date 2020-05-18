@@ -12,7 +12,7 @@ const callNetlify = async () => {
 
     try {
         await axios.post(
-            'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
+            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
         ).then(res => console.log(res)).catch(e => console.log(e))
       
     } catch (e) {
