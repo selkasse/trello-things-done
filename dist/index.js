@@ -4762,31 +4762,14 @@ const axios = __webpack_require__(896);
 const fetch = __webpack_require__(109);
 
 
-const { TRELLO_MEMBER } = process.env;
+// const { TRELLO_MEMBER } = process.env;
 const callNetlify = async () => {
-    console.log(
-        '\x1b[41m',
-        `TRELLO_MEMBER: ${TRELLO_MEMBER}`,
-        '\x1b[0m'
-    );
+
     try {
         await axios.post(
             'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
         ).then(res => console.log(res)).catch(e => console.log(e))
-        // console.log(
-        //     '\x1b[41m',
-        //     `scheduleResponse: ${scheduleResponse}`,
-        //     '\x1b[0m'
-        // );
-        // fetch('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',{
-        //     method: 'post',
-        //     // body: JSON.stringify({
-        //     //     memberId: TRELLO_MEMBER
-        //     // }),
-        //     headers: { 'Content-Type': 'application/json' },
-        // })
-        //     .then(res => res.json())
-        //     .then(json => console.log(json));
+      
     } catch (e) {
         console.log(e);
     }
