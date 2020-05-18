@@ -7,12 +7,12 @@ const axios = require('axios');
 
 
 const { TRELLO_MEMBER } = process.env;
-console.log(
-    '\x1b[41m',
-    `TRELLO_MEMBER: ${TRELLO_MEMBER}`,
-    '\x1b[0m'
-);
 const callNetlify = async () => {
+    console.log(
+        '\x1b[41m',
+        `TRELLO_MEMBER: ${TRELLO_MEMBER}`,
+        '\x1b[0m'
+    );
     try {
         const scheduleResponse = await axios.post(
             'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards',
