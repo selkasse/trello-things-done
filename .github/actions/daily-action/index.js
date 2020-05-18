@@ -4,11 +4,14 @@
     //* https://help.github.com/en/actions/building-actions/creating-a-javascript-action
 */
 const axios = require('axios');
-const core = require('@actions/core');
-const github = require('@actions/github');
+
 
 const { TRELLO_MEMBER } = process.env;
-
+console.log(
+    '\x1b[41m',
+    `TRELLO_MEMBER: ${TRELLO_MEMBER}`,
+    '\x1b[0m'
+);
 const callNetlify = async () => {
     try {
         const scheduleResponse = await axios.post(
