@@ -62,6 +62,15 @@ exports.handler = function(event, context, callback) {
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
         const toDo = findList(lists, 'To Do');
+        console.log('\x1b[42m', 'PRINTING BOARD', '\x1b[0m');
+        console.log(board);
+        console.log('\x1b[42m', 'PRINTING PENDING LISTS', '\x1b[0m');
+        console.log(pendingLists);
+        console.log('\x1b[42m', 'PRINTING LISTS', '\x1b[0m');
+        console.log(lists);
+        console.log('\x1b[42m', 'PRINTING TODO', '\x1b[0m');
+        console.log(toDo);
+
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
             cards.forEach(async card => {
@@ -185,7 +194,7 @@ exports.handler = function(event, context, callback) {
         // * separate the 'Done' list from the other lists
         const { doneList, pendingLists } = splitLists(listsYesterday);
         console.log('\x1b[42m', pendingLists, '\x1b[0m');
-        const doneCards = await getCards(doneList);
+        // const doneCards = await getCards(doneList);
         await createBoard(pendingLists);
         await deleteBoard(boardYesterday);
 
