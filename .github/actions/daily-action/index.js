@@ -33,8 +33,14 @@ const setup = () => {
 const callNetlify = async () => {
 
     try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                'Access-Control-Allow-Origin': '*',
+            },
+        };
         await axios.post(
-            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:8000'
+            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:8000', config
         ).then(res => console.log(res)).catch(e => console.log(e))
       
     } catch (e) {
