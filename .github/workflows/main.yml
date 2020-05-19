@@ -1,24 +1,24 @@
 name: Cron # Name of our workflow
 
-on: push
+on:
+  push
   # schedule:
   #   - cron: "* * * * *"
 
 jobs:
-  curl:
-    runs-on: ubuntu-latest
-    steps:
-    - name: curl
-      uses: wei/curl@v1
-      with:
-        args: -X POST https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards -d 0
+  # curl:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: curl
+  #     uses: wei/curl@v1
+  #     with:
+  #       args: -X POST https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards -d 0
 
+  callNetlify:
+    runs-on: ubuntu-latest # Environment job will run in
 
-  # build:
-  #   runs-on: ubuntu-latest # Environment job will run in
-
-  #   steps: # Each action/command to run
-  #     - uses: actions/checkout@v1 # Helps check out the repo code
-  #     - uses: ./.github/actions/daily-action # Tell it to run our JS Action
+    steps: # Each action/command to run
+      - uses: actions/checkout@v1 # Helps check out the repo code
+      - uses: ./.github/actions/daily-action # Tell it to run our JS Action
 
 # curl -X POST https://example.com/
