@@ -111,8 +111,8 @@ exports.handler = function(event, context, callback) {
             const data = { memberID: TRELLO_MEMBER };
             const boardsResponse = await axios
                 .post('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards', data, config)
-                .then(res => console.log(res))
-                .catch(e => console.log(e));
+                .then(res => console.log('\x1b[42m', res, '\x1b[0m'))
+                .catch(e => console.log(console.log('\x1b[42m', e, '\x1b[0m')));
             const memberBoards = boardsResponse.data;
             for (let i = 0; i < memberBoards.length; i += 1) {
                 if (memberBoards[i].name === getYesterday()) {
