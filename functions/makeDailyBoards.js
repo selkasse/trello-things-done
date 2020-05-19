@@ -174,9 +174,9 @@ exports.handler = function(event, context, callback) {
         // * run the job at 02:30 a.m. every day
         // cron.schedule('30 2 * * *', async function() {
         /**
-            @param x1b[42m: gives the console log a green background
-            @param x1b[0m: sets the background color back to default after the log completes
-            */
+        @param x1b[42m: gives the console log a green background
+        @param x1b[0m: sets the background color back to default after the log completes
+        */
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
