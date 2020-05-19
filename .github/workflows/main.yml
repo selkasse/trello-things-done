@@ -11,7 +11,7 @@ jobs:
     - name: curl
       uses: wei/curl@v1
       with:
-        args: -X POST https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:443 -d 0
+        args: -X POST https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:9000 -d 0
 
 
   # build:
