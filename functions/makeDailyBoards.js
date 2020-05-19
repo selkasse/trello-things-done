@@ -18,7 +18,7 @@ exports.handler = function(event, context, callback) {
     // * get all lists from a board
     const getLists = async board => {
         const URL = `${BOARDS_URL}/${board.id}/lists?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
-
+        // console.log(URL);
         try {
             const lists = await axios.get(URL);
             return lists.data;
@@ -179,10 +179,10 @@ exports.handler = function(event, context, callback) {
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
-        console.log('\x1b[42m', boardYesterday, '\x1b[0m');
-
+        
         // * get the lists from yesterday's board
         const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
+        console.log('\x1b[42m', listsYesterday, '\x1b[0m');
         // * separate the 'Done' list from the other lists
         const { doneList, pendingLists } = splitLists(listsYesterday);
         const doneCards = await getCards(doneList);
