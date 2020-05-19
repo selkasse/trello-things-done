@@ -52,7 +52,7 @@ exports.handler = function(event, context, callback) {
     const addCardToList = async (card, list) => {
         const URL = `${CARDS_URL}?idList=${list.id}&name=${card.name}&key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
         try {
-            axios.post(URL);
+            axios.post(URL).then(res => console.log(res)).catch(e => console.log(e))
         } catch (e) {
             console.log(e);
         }
@@ -71,8 +71,7 @@ exports.handler = function(event, context, callback) {
         
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
-            console.log('\x1b[42m', 'PRINTING CARDS', '\x1b[0m');
-            console.log(cards);
+           
             cards.forEach(async card => {
                 await addCardToList(card, toDo);
             });
