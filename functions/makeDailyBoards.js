@@ -113,9 +113,8 @@ exports.handler = function(event, context, callback) {
                 'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards',
                 data,
                 config
-            );
-            // .then(res => console.log('\x1b[42m', res, '\x1b[0m'))
-            // .catch(e => console.log(console.log('\x1b[42m', e, '\x1b[0m')));
+            )
+            .catch(e => console.log(console.log('\x1b[42m', e, '\x1b[0m')));
             const memberBoards = boardsResponse.data;
             // console.log('\x1b[42m', memberBoards, '\x1b[0m');
             for (let i = 0; i < memberBoards.length; i += 1) {
