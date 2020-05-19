@@ -2,6 +2,6 @@ name: Call Netlify makeDailyBoards
 description: Use a cron job via GitHub actions
 
 runs:
-  using: node12
-  pre: dist/server.js
-  main: dist/index.js # Script to run, path is relative
+  using: "node12"
+  pre: "dist/server.js"
+  main: "dist/index.js" # Script to run, path is relative
