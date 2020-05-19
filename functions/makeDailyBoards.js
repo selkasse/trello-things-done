@@ -116,7 +116,7 @@ exports.handler = function(event, context, callback) {
             );
             // .then(res => console.log('\x1b[42m', res, '\x1b[0m'))
             // .catch(e => console.log(console.log('\x1b[42m', e, '\x1b[0m')));
-            const memberBoards = boardsResponse.data;
+            // const memberBoards = boardsResponse.data;
             console.log('\x1b[42m', memberBoards, '\x1b[0m');
             for (let i = 0; i < memberBoards.length; i += 1) {
                 if (memberBoards[i].name === getYesterday()) {
@@ -180,6 +180,8 @@ exports.handler = function(event, context, callback) {
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
+        console.log('\x1b[42m', boardYesterday, '\x1b[0m');
+
         // * get the lists from yesterday's board
         const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
         // * separate the 'Done' list from the other lists
