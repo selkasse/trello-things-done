@@ -40,7 +40,7 @@ const callNetlify = async () => {
             },
         };
         await axios.post(
-            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:8000', config
+            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards', config
         ).then(res => console.log(res)).catch(e => console.log(e))
       
     } catch (e) {
