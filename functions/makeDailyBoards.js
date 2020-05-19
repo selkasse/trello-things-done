@@ -62,17 +62,17 @@ exports.handler = function(event, context, callback) {
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
         const toDo = findList(lists, 'To Do');
-        console.log('\x1b[42m', 'PRINTING BOARD', '\x1b[0m');
-        console.log(board);
-        console.log('\x1b[42m', 'PRINTING PENDING LISTS', '\x1b[0m');
-        console.log(pendingLists);
-        console.log('\x1b[42m', 'PRINTING LISTS', '\x1b[0m');
-        console.log(lists);
-        console.log('\x1b[42m', 'PRINTING TODO', '\x1b[0m');
-        console.log(toDo);
-
+        // console.log('\x1b[42m', 'PRINTING BOARD', '\x1b[0m');
+        // console.log(board);
+        // console.log('\x1b[42m', 'PRINTING PENDING LISTS', '\x1b[0m');
+        // console.log(pendingLists);
+        // console.log('\x1b[42m', 'PRINTING LISTS', '\x1b[0m');
+        // console.log(lists);
+        
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
+            console.log('\x1b[42m', 'PRINTING CARDS', '\x1b[0m');
+            console.log(cards);
             cards.forEach(async card => {
                 await addCardToList(card, toDo);
             });
