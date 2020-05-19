@@ -102,8 +102,16 @@ exports.handler = function(event, context, callback) {
     // * returns the board that was created automatically yesterday
     const getBoardYesterday = async () => {
         try {
+            const headers = {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            };
             const boardsResponse = await axios
-                .post('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards', { TRELLO_MEMBER })
+                .post(
+                    'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards',
+                    { TRELLO_MEMBER },
+                    { headers }
+                )
                 .then(res => console.log(res))
                 .catch(e => console.log(e));
             const memberBoards = boardsResponse.data;
