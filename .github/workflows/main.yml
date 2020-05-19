@@ -15,7 +15,7 @@ jobs:
   #         args: -X POST https://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards -d 0
 
   callNetlify:
-    runs-on: ubuntu-latest # Environment the job will run in
+    runs-on: ubuntu-latest # Environment job will run in
     steps: # Each action/command to run
       - uses: actions/checkout@v1 # Helps check out the repo code
       - uses: ./.github/actions/daily-action # Tell it to run our JS Action
