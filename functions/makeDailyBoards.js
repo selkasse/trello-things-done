@@ -182,9 +182,9 @@ exports.handler = function(event, context, callback) {
         
         // * get the lists from yesterday's board
         const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
-        console.log('\x1b[42m', listsYesterday, '\x1b[0m');
         // * separate the 'Done' list from the other lists
         const { doneList, pendingLists } = splitLists(listsYesterday);
+        console.log('\x1b[42m', pendingLists, '\x1b[0m');
         const doneCards = await getCards(doneList);
         await createBoard(pendingLists);
         await deleteBoard(boardYesterday);
