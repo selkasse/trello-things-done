@@ -34,7 +34,7 @@ const callNetlify = async () => {
 
     try {
         await axios.post(
-            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards'
+            'http://youthful-elion-cdcea9.netlify.app/.netlify/functions/makeDailyBoards:8000'
         ).then(res => console.log(res)).catch(e => console.log(e))
       
     } catch (e) {
@@ -42,6 +42,6 @@ const callNetlify = async () => {
     }
 };
 
-setup();
+// setup();
 callNetlify();
 
