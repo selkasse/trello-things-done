@@ -109,7 +109,7 @@ exports.handler = function(event, context, callback) {
             const boardsResponse = await axios
                 .post(
                     'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards',
-                    { TRELLO_MEMBER },
+                    { memberID: TRELLO_MEMBER },
                     { headers }
                 )
                 .then(res => console.log(res))
