@@ -1,9 +1,9 @@
 name: Cron # Name of our workflow
 
 on:
-  push
-  # schedule:
-  #   - cron: "* * * * *"
+  # push
+  schedule:
+    - cron: "* * * * *"
 
 jobs:
   # curl:
