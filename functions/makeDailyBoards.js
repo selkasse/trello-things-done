@@ -4,7 +4,6 @@ const moment = require('moment');
 
 exports.handler = function(event, context, callback) {
     const { BOARDS_URL, LISTS_URL, CARDS_URL, TRELLO_KEY, TRELLO_TOKEN, TRELLO_MEMBER } = process.env;
-    // const { memberID } = JSON.parse(event.body);
 
     const createList = async (id, listName) => {
         // * pos=17000 is so that the list is placed between 'To Do' and 'Doing'
@@ -18,7 +17,6 @@ exports.handler = function(event, context, callback) {
     // * get all lists from a board
     const getLists = async board => {
         const URL = `${BOARDS_URL}/${board.id}/lists?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
-        // console.log(URL);
         try {
             const lists = await axios.get(URL);
             return lists.data;
@@ -52,7 +50,10 @@ exports.handler = function(event, context, callback) {
     const addCardToList = async (card, list) => {
         const URL = `${CARDS_URL}?idList=${list.id}&name=${card.name}&key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
         try {
-            axios.post(URL).then(res => console.log(res)).catch(e => console.log(e))
+            axios
+                .post(URL)
+                .then(res => console.log(res))
+                .catch(e => console.log(e));
         } catch (e) {
             console.log(e);
         }
@@ -62,16 +63,10 @@ exports.handler = function(event, context, callback) {
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
         const toDo = findList(lists, 'To Do');
-        // console.log('\x1b[42m', 'PRINTING BOARD', '\x1b[0m');
-        // console.log(board);
-        // console.log('\x1b[42m', 'PRINTING PENDING LISTS', '\x1b[0m');
-        // console.log(pendingLists);
-        // console.log('\x1b[42m', 'PRINTING LISTS', '\x1b[0m');
-        // console.log(lists);
-        
+
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
-           
+
             cards.forEach(async card => {
                 await addCardToList(card, toDo);
             });
@@ -117,21 +112,14 @@ exports.handler = function(event, context, callback) {
                 },
             };
             const data = { memberID: TRELLO_MEMBER };
-            const boardsResponse = await axios.post(
-                'https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards',
-                data,
-                config
-            )
-            .catch(e => console.log(console.log('\x1b[42m', e, '\x1b[0m')));
+            const boardsResponse = await axios
+                .post('https://youthful-elion-cdcea9.netlify.app/.netlify/functions/getMemberBoards', data, config)
+                .catch(e => console.log(e));
+
             const memberBoards = boardsResponse.data;
-            // console.log('\x1b[42m', memberBoards, '\x1b[0m');
             for (let i = 0; i < memberBoards.length; i += 1) {
                 if (memberBoards[i].name === getYesterday()) {
-                    console.log(
-                        '\x1b[41m',
-                        `board with shortUrl ${memberBoards[i].shortUrl} and name ${memberBoards[i].name} will be deleted`,
-                        '\x1b[0m'
-                    );
+                    // * return the board if the name is TTD <yesterday's date>
                     return memberBoards[i];
                 }
             }
@@ -185,8 +173,8 @@ exports.handler = function(event, context, callback) {
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
-        
-        if(boardYesterday){
+
+        if (boardYesterday) {
             // * get the lists from yesterday's board
             const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
             // * separate the 'Done' list from the other lists

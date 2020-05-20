@@ -72,18 +72,6 @@ const getEnabledBoards = async boards => {
     return enabledBoards;
 };
 
-const initDailyBoards = async id => {
-    console.log('init daily boards in client.js');
-    const data = { memberID: id };
-    await fetch('/.netlify/functions/makeDailyBoards', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-        body: JSON.stringify(data),
-    }).catch(e => console.log(e));
-};
-
 const getShortUrl = function(id, boards) {
     const board = boards.find(foundBoard => foundBoard.id === id);
     return board.shortUrl;
@@ -100,26 +88,11 @@ TrelloPowerUp.initialize({
         const currentMember = t.getContext().member;
 
         try {
-            cron = await t.get('organization', 'shared', 'cron', false);
-            // cron = JSON.stringify(cronResponse);
-        } catch (e) {
-            console.log(e);
-        }
-
-        console.log(cron);
-        // if (!cron) {
-        //     console.log('inside cron block in board-buttons');
-        //     await initDailyBoards(currentMember);
-        //     await t.set('organization', 'shared', 'cron', true).catch(e => console.log(e));
-        // }
-
-        try {
             const configResponse = await t.get('organization', 'shared', 'config', 'not set');
             config = JSON.stringify(configResponse);
         } catch (e) {
             console.log(e);
         }
-        // console.log(config);
         if (config === 'not set') {
             await getBoards(currentMember).then(function(boards) {
                 memberBoards = boards;
@@ -127,7 +100,6 @@ TrelloPowerUp.initialize({
 
             // TODO: in master.js, only add to the dropdown if cron is false
             await getEnabledBoards(memberBoards).then(function(boards) {
-                // console.log(boards);
                 enabledBoards = boards;
             });
 
@@ -139,7 +111,6 @@ TrelloPowerUp.initialize({
             };
 
             await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
-            // window.localStorage.setItem('config', JSON.stringify(configParams));
         }
         return [
             {
@@ -159,21 +130,20 @@ TrelloPowerUp.initialize({
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             // console.log(memberBoards);
             const splitMaster = masterBoard.split(',');
-            const shortUrl = splitMaster[0];
-            const id = splitMaster[1];
-            console.log(shortUrl);
-            console.log(id);
-            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            const mastersSortUrl = splitMaster[0];
+            const masterID = splitMaster[1];
+
+            const currentBoard = t.getContext().board;
             // console.log(masterBoard);
             // console.log(currentBoard);
-            // const isMaster = currentBoard === masterBoard;
-            // return [
-            //     {
-            //         icon: isMaster ? CHECK_MARK_ICON : null,
-            //         text: isMaster ? 'GTD' : null,
-            //         callback: onCardBtnClick,
-            //     },
-            // ];
+            const isMaster = currentBoard === masterID;
+            return [
+                {
+                    icon: isMaster ? CHECK_MARK_ICON : null,
+                    text: isMaster ? 'GTD' : null,
+                    callback: onCardBtnClick,
+                },
+            ];
         });
     },
     'card-badges': function(t) {
