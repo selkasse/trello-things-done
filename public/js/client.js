@@ -130,13 +130,14 @@ TrelloPowerUp.initialize({
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             // console.log(memberBoards);
             const splitMaster = masterBoard.split(',');
-            const mastersSortUrl = splitMaster[0];
+            const masterShortUrl = splitMaster[0];
             const masterID = splitMaster[1];
 
             const currentBoard = t.getContext().board;
-            // console.log(masterBoard);
-            // console.log(currentBoard);
+            console.log(masterID);
+            console.log(currentBoard);
             const isMaster = currentBoard === masterID;
+            console.log(isMaster);
             return [
                 {
                     icon: isMaster ? CHECK_MARK_ICON : null,
