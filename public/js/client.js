@@ -126,13 +126,14 @@ TrelloPowerUp.initialize({
     },
     // * only show card buttons if master board
     'card-buttons': function(t) {
-        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
+        return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             // console.log(memberBoards);
             const splitMaster = masterBoard.split(',');
             const masterShortUrl = splitMaster[0];
             const masterID = splitMaster[1];
-
+            const enabledBoards = await t.get('organization', 'shared', 'config');
+            console.log(enabledBoards);
             const currentBoard = t.getContext().board;
             console.log(masterID);
             console.log(currentBoard);
