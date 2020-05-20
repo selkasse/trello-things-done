@@ -177,9 +177,7 @@ exports.handler = function(event, context, callback) {
 
     // * main logic for makeDailyBoards is housed in this function
     const makeBoards = async () => {
-        console.log('\x1b[42m', `makeBoards has been called!`, '\x1b[0m');
-        // * run the job at 02:30 a.m. every day
-        // cron.schedule('30 2 * * *', async function() {
+        // * run the job at 02:30 a.m. every day (from GitHub actions cron job)
         /**
         @param x1b[42m: gives the console log a green background
         @param x1b[0m: sets the background color back to default after the log completes
@@ -188,17 +186,17 @@ exports.handler = function(event, context, callback) {
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
         
-        // * get the lists from yesterday's board
-        const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
-        // * separate the 'Done' list from the other lists
-        const { doneList, pendingLists } = splitLists(listsYesterday);
-        console.log('\x1b[42m', pendingLists, '\x1b[0m');
-        // const doneCards = await getCards(doneList);
-        await createBoard(pendingLists);
-        await deleteBoard(boardYesterday);
+        if(boardYesterday){
+            // * get the lists from yesterday's board
+            const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
+            // * separate the 'Done' list from the other lists
+            const { doneList, pendingLists } = splitLists(listsYesterday);
+            // const doneCards = await getCards(doneList);
+            await createBoard(pendingLists);
+            await deleteBoard(boardYesterday);
+        }
 
         send();
-        // });
     };
 
     // * kick off the function when the client sends a request to makeDailyBoards
