@@ -134,10 +134,10 @@ TrelloPowerUp.initialize({
             const masterID = splitMaster[1];
             const enabledBoards = await t.get('organization', 'shared', 'config');
             console.log(enabledBoards);
-            const currentBoard = t.getContext().board;
+            const currentBoard = getShortUrl(t.getContext().board, enabledBoards);
             console.log(masterID);
             console.log(currentBoard);
-            const isMaster = currentBoard === masterID;
+            const isMaster = currentBoard === masterShortUrl;
             console.log(isMaster);
             return [
                 {
