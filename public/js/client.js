@@ -72,9 +72,24 @@ const getEnabledBoards = async boards => {
     return enabledBoards;
 };
 
-const getShortUrl = function(id, boards) {
-    const board = boards.find(foundBoard => foundBoard.id === id);
-    return board.shortUrl;
+const getShortUrl = async function(boardID) {
+    const data = { boardID };
+    let shortUrl;
+    await fetch('/.netlify/functions/getShortUrl', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(res => res.json())
+        .then(res => {
+            shortUrl = res;
+        });
+    return shortUrl;
+
+    // const board = boards.find(foundBoard => foundBoard.id === id);
+    // return board.shortUrl;
 };
 
 // eslint-disable-next-line no-undef
@@ -84,8 +99,22 @@ TrelloPowerUp.initialize({
         let memberBoards;
         let enabledBoards;
         let config;
-        let cron;
+        let shortUrl;
         const currentMember = t.getContext().member;
+        const currentBoard = t.getContext.board;
+
+        try {
+            const shortUrlResponse = await t.get('member', 'shared', 'currentShortUrl', 'not set');
+            shortUrl = JSON.stringify(shortUrlResponse);
+        } catch (e) {
+            console.log(e);
+        }
+
+        if (shortUrl === 'not set') {
+            await getShortUrl(currentBoard).then(async function(url) {
+                await t.set('member', 'shared', 'currentShortUrl', url);
+            });
+        }
 
         try {
             const configResponse = await t.get('organization', 'shared', 'config', 'not set');
@@ -98,17 +127,16 @@ TrelloPowerUp.initialize({
                 memberBoards = boards;
             });
 
-            // TODO: in master.js, only add to the dropdown if cron is false
             await getEnabledBoards(memberBoards).then(function(boards) {
                 enabledBoards = boards;
             });
 
             // * populate configParams when the board loads
-            const configParams = {
-                currentMember,
-                memberBoards,
-                enabledBoards,
-            };
+            // const configParams = {
+            //     currentMember,
+            //     memberBoards,
+            //     enabledBoards,
+            // };
 
             await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
         }
@@ -132,13 +160,13 @@ TrelloPowerUp.initialize({
             const splitMaster = masterBoard.split(',');
             const masterShortUrl = splitMaster[0];
             const masterID = splitMaster[1];
-            const enabledBoards = await t.get('organization', 'shared', 'config');
-            console.log(enabledBoards);
-            console.log(t.getContext());
+            const currentShortUrl = await t.get('organization', 'shared', 'currentShortUrl');
+            // console.log(enabledBoards);
+            // console.log(t.getContext());
             const currentBoard = t.getContext().board;
-            console.log(masterID);
-            console.log(currentBoard);
-            const isMaster = currentBoard === masterShortUrl;
+            console.log(currentShortUrl);
+            // console.log(currentBoard);
+            const isMaster = currentShortUrl === masterShortUrl;
             console.log(isMaster);
             return [
                 {
