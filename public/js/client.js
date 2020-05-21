@@ -177,20 +177,22 @@ TrelloPowerUp.initialize({
         });
     },
     'card-badges': function(t) {
-        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
-            // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            // const isMaster = currentBoard === masterBoard;
-            // return t.get('card', 'shared', 'schedule').then(function(schedule) {
-            //     if (isMaster) {
-            //         return [
-            //             {
-            //                 icon: schedule ? CHECK_MARK_ICON : null,
-            //                 text: schedule || null,
-            //             },
-            //         ];
-            //     }
-            // });
+        return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
+            const splitMaster = masterBoard.split(',');
+            const masterShortUrl = splitMaster[0];
+            const currentShortUrl = await t.get('member', 'shared', 'currentShortUrl');
+            const isMaster = currentShortUrl === masterShortUrl;
+
+            return t.get('card', 'shared', 'schedule').then(function(schedule) {
+                if (isMaster) {
+                    return [
+                        {
+                            icon: schedule ? CHECK_MARK_ICON : null,
+                            text: schedule || null,
+                        },
+                    ];
+                }
+            });
         });
     },
     // * only show card detail badges if master board
