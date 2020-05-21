@@ -114,6 +114,7 @@ TrelloPowerUp.initialize({
 
         if (shortUrl === 'not set') {
             await getShortUrl(currentBoard).then(async function(url) {
+                console.log(url);
                 await t.set('member', 'shared', 'currentShortUrl', url);
             });
         }
