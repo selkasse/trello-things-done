@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-undef
 const t = TrelloPowerUp.iframe();
 
-window.master.addEventListener('submit', function(event) {
+window.master.addEventListener('submit', async function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
     // * Set the master board
@@ -9,6 +9,7 @@ window.master.addEventListener('submit', function(event) {
     // * This is because the shortUrl is actually the unique identifier for a board, not the board ID
     const splitValue = window.masterBoard.value.split(',');
     console.log(splitValue);
+    await t.set('member', 'shared', 'currentShortUrl', splitValue[0]);
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value).then(function() {
         console.log(window.masterBoard.value);
         t.closePopup();
