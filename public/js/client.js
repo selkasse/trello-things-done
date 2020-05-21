@@ -93,7 +93,6 @@ TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
         let memberBoards;
         let enabledBoards;
-        // let config;
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
         const setShortUrlFromContext = async function() {
