@@ -93,42 +93,43 @@ TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
         let memberBoards;
         let enabledBoards;
-        let config;
+        // let config;
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
-        const getShortUrlFromContext = async function() {
+        const setShortUrlFromContext = async function() {
             try {
                 const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
-                return shortUrlContext;
+                if (shortUrlContext === 'not set') {
+                    await getShortUrl(currentBoard).then(async function(url) {
+                        await t.set('member', 'shared', 'currentShortUrl', url);
+                    });
+                }
             } catch (e) {
                 console.log(e);
             }
         };
 
-        const shortUrl = getShortUrlFromContext();
-        if (shortUrl === 'not set') {
-            await getShortUrl(currentBoard).then(async function(url) {
-                await t.set('member', 'shared', 'currentShortUrl', url);
-            });
-        }
+        const setConfigFromContext = async function() {
+            try {
+                const configResponse = await t.get('organization', 'shared', 'config', 'not set');
+                const configContext = JSON.stringify(configResponse);
+                // return configContext;
+                if (configContext === 'not set') {
+                    await getBoards(currentMember).then(function(boards) {
+                        memberBoards = boards;
+                    });
+                    await getEnabledBoards(memberBoards).then(function(boards) {
+                        enabledBoards = boards;
+                    });
+                    await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        setShortUrlFromContext();
+        setConfigFromContext();
 
-        try {
-            const configResponse = await t.get('organization', 'shared', 'config', 'not set');
-            config = JSON.stringify(configResponse);
-        } catch (e) {
-            console.log(e);
-        }
-        if (config === 'not set') {
-            await getBoards(currentMember).then(function(boards) {
-                memberBoards = boards;
-            });
-
-            await getEnabledBoards(memberBoards).then(function(boards) {
-                enabledBoards = boards;
-            });
-
-            await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
-        }
         return [
             {
                 icon: {
