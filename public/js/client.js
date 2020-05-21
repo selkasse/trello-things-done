@@ -184,39 +184,39 @@ TrelloPowerUp.initialize({
     },
     'card-badges': function(t) {
         return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
-            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            const isMaster = currentBoard === masterBoard;
-            return t.get('card', 'shared', 'schedule').then(function(schedule) {
-                if (isMaster) {
-                    return [
-                        {
-                            icon: schedule ? CHECK_MARK_ICON : null,
-                            text: schedule || null,
-                        },
-                    ];
-                }
-            });
+            // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            // const isMaster = currentBoard === masterBoard;
+            // return t.get('card', 'shared', 'schedule').then(function(schedule) {
+            //     if (isMaster) {
+            //         return [
+            //             {
+            //                 icon: schedule ? CHECK_MARK_ICON : null,
+            //                 text: schedule || null,
+            //             },
+            //         ];
+            //     }
+            // });
         });
     },
     // * only show card detail badges if master board
     'card-detail-badges': function(t) {
         return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
-            const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-            const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            const isMaster = currentBoard === masterBoard;
-            if (isMaster) {
-                return t.get('card', 'shared', 'schedule').then(function(schedule) {
-                    return [
-                        {
-                            title: 'Schedule',
-                            color: schedule ? 'green' : 'blue',
-                            text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
-                            callback: onCardBtnClick,
-                        },
-                    ];
-                });
-            }
+            // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
+            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
+            // const isMaster = currentBoard === masterBoard;
+            // if (isMaster) {
+            //     return t.get('card', 'shared', 'schedule').then(function(schedule) {
+            //         return [
+            //             {
+            //                 title: 'Schedule',
+            //                 color: schedule ? 'green' : 'blue',
+            //                 text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
+            //                 callback: onCardBtnClick,
+            //             },
+            //         ];
+            //     });
+            // }
         });
     },
 });
