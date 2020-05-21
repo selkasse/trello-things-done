@@ -5,6 +5,8 @@ window.master.addEventListener('submit', function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
     // * Set the master board
+    // * Note that we are storing both the ID and shortUrl in the masterBoard property
+    // * This is because the shortUrl is actually the unique identifier for a board, not the board ID
     const splitValue = window.masterBoard.value.split(',');
     console.log(splitValue);
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value).then(function() {
