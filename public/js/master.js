@@ -8,8 +8,8 @@ window.master.addEventListener('submit', async function(event) {
     // * Note that we are storing both the ID and shortUrl in the masterBoard property
     // * This is because the shortUrl is actually the unique identifier for a board, not the board ID
     const splitValue = window.masterBoard.value.split(',');
-    console.log(splitValue);
-    await t.set('member', 'shared', 'currentShortUrl', splitValue[0]);
+    // console.log(splitValue);
+    // await t.set('member', 'shared', 'currentShortUrl', splitValue[0]);
     return t.set('member', 'shared', 'masterBoard', window.masterBoard.value).then(function() {
         console.log(window.masterBoard.value);
         t.closePopup();
