@@ -202,9 +202,7 @@ TrelloPowerUp.initialize({
             const masterShortUrl = splitMaster[0];
             const currentShortUrl = await t.get('member', 'shared', 'currentShortUrl');
             const isMaster = currentShortUrl === masterShortUrl;
-            // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
-            // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
-            // const isMaster = currentBoard === masterBoard;
+
             if (isMaster) {
                 return t.get('card', 'shared', 'schedule').then(function(schedule) {
                     return [
