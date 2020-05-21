@@ -74,6 +74,7 @@ const getEnabledBoards = async boards => {
 
 const getShortUrl = async function(boardID) {
     const data = { boardID };
+    console.log(data);
     let shortUrl;
     await fetch('/.netlify/functions/getShortUrl', {
         method: 'POST',
@@ -84,6 +85,7 @@ const getShortUrl = async function(boardID) {
     })
         .then(res => res.json())
         .then(res => {
+            console.log(res);
             shortUrl = res;
         });
     return shortUrl;
@@ -114,7 +116,7 @@ TrelloPowerUp.initialize({
 
         if (shortUrl === 'not set') {
             await getShortUrl(currentBoard).then(async function(url) {
-                console.log(url);
+                // console.log(url);
                 await t.set('member', 'shared', 'currentShortUrl', url);
             });
         }
