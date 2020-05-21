@@ -98,11 +98,11 @@ TrelloPowerUp.initialize({
         const setShortUrlFromContext = async function() {
             try {
                 const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
-                if (shortUrlContext === 'not set') {
-                    await getShortUrl(currentBoard).then(async function(url) {
-                        await t.set('member', 'shared', 'currentShortUrl', url);
-                    });
-                }
+                // if (shortUrlContext === 'not set') {
+                await getShortUrl(currentBoard).then(async function(url) {
+                    await t.set('member', 'shared', 'currentShortUrl', url);
+                });
+                // }
             } catch (e) {
                 console.log(e);
             }
