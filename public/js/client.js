@@ -164,6 +164,10 @@ TrelloPowerUp.initialize({
             const masterShortUrl = splitMaster[0];
             const currentShortUrl = await t.get('member', 'shared', 'currentShortUrl');
             const isMaster = currentShortUrl === masterShortUrl;
+            console.log(t.getContext().board);
+            console.log(masterBoard);
+            console.log(masterShortUrl);
+            console.log(currentShortUrl);
 
             return t.get('card', 'shared', 'schedule').then(function(schedule) {
                 if (isMaster) {
