@@ -35,8 +35,10 @@ t.render(async function() {
         const option = document.createElement('option');
         option.value = `${board.shortUrl},${board.id}`;
         option.text = board.name;
-        console.log(option);
-        if (masterBoard === board.shortUrl) {
+        // console.log(option);
+        const splitMaster = masterBoard.split(',');
+        const masterShortUrl = splitMaster[0];
+        if (masterShortUrl === board.shortUrl) {
             option.selected = true;
             option.text += ' ✔️';
         }
