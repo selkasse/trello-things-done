@@ -197,22 +197,26 @@ TrelloPowerUp.initialize({
     },
     // * only show card detail badges if master board
     'card-detail-badges': function(t) {
-        return t.get('member', 'shared', 'masterBoard').then(function(masterBoard) {
+        return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
+            const splitMaster = masterBoard.split(',');
+            const masterShortUrl = splitMaster[0];
+            const currentShortUrl = await t.get('member', 'shared', 'currentShortUrl');
+            const isMaster = currentShortUrl === masterShortUrl;
             // const { memberBoards } = JSON.parse(window.localStorage.getItem('config'));
             // const currentBoard = getShortUrl(t.getContext().board, memberBoards);
             // const isMaster = currentBoard === masterBoard;
-            // if (isMaster) {
-            //     return t.get('card', 'shared', 'schedule').then(function(schedule) {
-            //         return [
-            //             {
-            //                 title: 'Schedule',
-            //                 color: schedule ? 'green' : 'blue',
-            //                 text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
-            //                 callback: onCardBtnClick,
-            //             },
-            //         ];
-            //     });
-            // }
+            if (isMaster) {
+                return t.get('card', 'shared', 'schedule').then(function(schedule) {
+                    return [
+                        {
+                            title: 'Schedule',
+                            color: schedule ? 'green' : 'blue',
+                            text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
+                            callback: onCardBtnClick,
+                        },
+                    ];
+                });
+            }
         });
     },
 });
