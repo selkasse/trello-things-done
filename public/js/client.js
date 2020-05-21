@@ -1,5 +1,3 @@
-// import moment from '../../node_modules/moment/src/moment.js';
-
 // eslint-disable-next-line no-undef
 const { Promise } = TrelloPowerUp;
 
@@ -55,7 +53,6 @@ const getBoards = async id => {
 const getEnabledBoards = async boards => {
     console.log('inside getEnabledBoards');
 
-    // console.log(boards);
     const data = { boards };
     let enabledBoards;
     await fetch('/.netlify/functions/getEnabledBoards', {
@@ -89,36 +86,28 @@ const getShortUrl = async function(boardID) {
             shortUrl = res;
         });
     return shortUrl;
-
-    // const board = boards.find(foundBoard => foundBoard.id === id);
-    // return board.shortUrl;
 };
 
 // eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
-        // * initialize variables to be used for configParams
         let memberBoards;
         let enabledBoards;
         let config;
-        let shortUrl;
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
+        const getShortUrlFromContext = async function() {
+            try {
+                const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
+                return shortUrlContext;
+            } catch (e) {
+                console.log(e);
+            }
+        };
 
-        try {
-            shortUrl = await t.get('member', 'shared', 'currentShortUrl', 'not set');
-            // shortUrl = JSON.stringify(shortUrlResponse);
-        } catch (e) {
-            console.log(e);
-        }
-
-        console.log(shortUrl);
-
+        const shortUrl = getShortUrlFromContext();
         if (shortUrl === 'not set') {
-            console.log('entering shortUrl not set block');
-            console.log(`printing currentBoard inside not set block: ${currentBoard}`);
             await getShortUrl(currentBoard).then(async function(url) {
-                // console.log(url);
                 await t.set('member', 'shared', 'currentShortUrl', url);
             });
         }
@@ -137,13 +126,6 @@ TrelloPowerUp.initialize({
             await getEnabledBoards(memberBoards).then(function(boards) {
                 enabledBoards = boards;
             });
-
-            // * populate configParams when the board loads
-            // const configParams = {
-            //     currentMember,
-            //     memberBoards,
-            //     enabledBoards,
-            // };
 
             await t.set('organization', 'shared', 'config', enabledBoards).catch(e => console.log(e));
         }
