@@ -116,6 +116,7 @@ TrelloPowerUp.initialize({
 
         if (shortUrl === 'not set') {
             console.log('entering shortUrl not set block');
+            console.log(`printing currentBoard inside not set block: ${currentBoard}`);
             await getShortUrl(currentBoard).then(async function(url) {
                 // console.log(url);
                 await t.set('member', 'shared', 'currentShortUrl', url);
