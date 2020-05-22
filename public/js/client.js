@@ -97,7 +97,7 @@ TrelloPowerUp.initialize({
         const currentBoard = t.getContext().board;
         const setShortUrlFromContext = async function() {
             try {
-                const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
+                // const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
                 // if (shortUrlContext === 'not set') {
                 await getShortUrl(currentBoard).then(async function(url) {
                     await t.set('member', 'shared', 'currentShortUrl', url);
