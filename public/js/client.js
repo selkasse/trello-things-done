@@ -184,7 +184,6 @@ TrelloPowerUp.initialize({
     },
     // * only show card detail badges if master board
     'card-detail-badges': function(t) {
-        console.log(t.getContext());
 
         return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
             const splitMaster = masterBoard.split(',');

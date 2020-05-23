@@ -11,6 +11,8 @@ window.schedule.addEventListener('submit', function(event) {
 
 // * When schedule.html is rendered, display the current value of the scheduled date
 t.render(function() {
+    console.log(t.getContext());
+
     return (
         t
             .get('card', 'shared', 'schedule')
