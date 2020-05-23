@@ -3,6 +3,10 @@ const t = TrelloPowerUp.iframe();
 window.schedule.addEventListener('submit', function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
+    console.log(t.getContext().board);
+    console.log(t.getContext().card);
+    const date = window.scheduledCard.value;
+    console.log(date);
     // * Set the scheduled date for the card
     return t.set('card', 'shared', 'schedule', window.scheduledCard.value).then(function() {
         t.closePopup();
@@ -11,7 +15,6 @@ window.schedule.addEventListener('submit', function(event) {
 
 // * When schedule.html is rendered, display the current value of the scheduled date
 t.render(function() {
-    console.log(t.getContext());
 
     return (
         t
