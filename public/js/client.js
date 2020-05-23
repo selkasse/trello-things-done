@@ -91,7 +91,6 @@ const getShortUrl = async function(boardID) {
 // eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
-        console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
         const currentMember = t.getContext().member;
@@ -185,6 +184,8 @@ TrelloPowerUp.initialize({
     },
     // * only show card detail badges if master board
     'card-detail-badges': function(t) {
+        console.log(t.getContext());
+
         return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
             const splitMaster = masterBoard.split(',');
             const masterShortUrl = splitMaster[0];
