@@ -91,6 +91,7 @@ const getShortUrl = async function(boardID) {
 // eslint-disable-next-line no-undef
 TrelloPowerUp.initialize({
     'board-buttons': async function(t) {
+        console.log(t.getContext());
         let memberBoards;
         let enabledBoards;
         const currentMember = t.getContext().member;

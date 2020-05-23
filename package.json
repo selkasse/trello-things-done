@@ -37,6 +37,7 @@
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "faunadb": "^2.14.1",
     "flatted": "^2.0.2",
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.28",
