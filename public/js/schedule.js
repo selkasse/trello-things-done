@@ -5,7 +5,7 @@ window.schedule.addEventListener('submit', function(event) {
     event.preventDefault();
     // console.log(t.getContext().board);
     // console.log(t.getContext().card);
-    // const date = window.scheduledCard.value;
+    const date = window.scheduledCard.value;
     // console.log(date);
     const data = {
         boardID: t.getContext().board,
