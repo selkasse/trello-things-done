@@ -1,8 +1,14 @@
 const cron = require('node-cron');
 const axios = require('axios');
 const moment = require('moment');
+const faunadb = require('faunadb');
+
 
 exports.handler = function(event, context, callback) {
+    const q = faunadb.query;
+    const client = new faunadb.Client({
+        secret: process.env.TTD_FAUNA_SECRET,
+    });
     const { BOARDS_URL, LISTS_URL, CARDS_URL, TRELLO_KEY, TRELLO_TOKEN, TRELLO_MEMBER } = process.env;
 
     const createList = async (id, listName) => {
@@ -52,7 +58,7 @@ exports.handler = function(event, context, callback) {
         try {
             axios
                 .post(URL)
-                .then(res => console.log(res))
+                // .then(res => console.log(res))
                 .catch(e => console.log(e));
         } catch (e) {
             console.log(e);
@@ -63,6 +69,13 @@ exports.handler = function(event, context, callback) {
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
         const toDo = findList(lists, 'To Do');
+        // TODO : get scheduled cards for today
+        client.query(
+            q.Get(
+                q.Ref(q.Collection('SCHEDULED_CARDS'),'266362958579237395')
+            )
+        )
+            .then((ret) => console.log(ret))
 
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
