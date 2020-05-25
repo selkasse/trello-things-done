@@ -162,6 +162,8 @@ exports.handler = function(event, context, callback) {
                 .catch(e => console.log(e));
 
             const memberBoards = boardsResponse.data;
+            console.log(`Printing memberBoards${memberBoards}`);
+
             for (let i = 0; i < memberBoards.length; i += 1) {
                 if (memberBoards[i].name === getYesterday()) {
                     // * return the board if the name is TTD <yesterday's date>
@@ -208,6 +210,9 @@ exports.handler = function(event, context, callback) {
         }
     };
 
+    const deleteScheduledCardsFromDB = async date =>
+        client.query(q.Delete(q.Select('ref', q.Get(q.Match(q.Index('scheduled_date'), date)))));
+
     // * main logic for makeDailyBoards is housed in this function
     const makeBoards = async () => {
         // * run the job at 02:30 a.m. every day (from GitHub actions cron job)
@@ -218,7 +223,7 @@ exports.handler = function(event, context, callback) {
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
-
+        console.log(boardYesterday);
         if (boardYesterday) {
             // * get the lists from yesterday's board
             const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
@@ -227,6 +232,19 @@ exports.handler = function(event, context, callback) {
             // const doneCards = await getCards(doneList);
             await createBoard(pendingLists);
             await deleteBoard(boardYesterday);
+        }
+        // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
+        const yesterday = moment().subtract(1, 'days');
+        const formattedYesterday = yesterday.format('YYYY-MM-DD');
+
+        const cardsYesterday = await queryScheduledCards(formattedYesterday);
+        if (cardsYesterday.length > 0) {
+            console.log('there were cards scheduled for yesterday');
+            cardsYesterday.forEach(async () => {
+                await deleteScheduledCardsFromDB(formattedYesterday);
+            });
+        } else {
+            console.log('no cards scheduled for yesterday');
         }
 
         send();
