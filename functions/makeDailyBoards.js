@@ -3,7 +3,6 @@ const axios = require('axios');
 const moment = require('moment');
 const faunadb = require('faunadb');
 
-
 exports.handler = function(event, context, callback) {
     const q = faunadb.query;
     const client = new faunadb.Client({
@@ -26,6 +25,16 @@ exports.handler = function(event, context, callback) {
         try {
             const lists = await axios.get(URL);
             return lists.data;
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const getCardById = async id => {
+        const URL = `${CARDS_URL}/${id}?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
+        try {
+            const card = await axios.get(URL);
+            return card.data;
         } catch (e) {
             console.log(e);
         }
@@ -56,30 +65,53 @@ exports.handler = function(event, context, callback) {
     const addCardToList = async (card, list) => {
         const URL = `${CARDS_URL}?idList=${list.id}&name=${card.name}&key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
         try {
-            axios
-                .post(URL)
-                // .then(res => console.log(res))
-                .catch(e => console.log(e));
+            axios.post(URL).catch(e => console.log(e));
         } catch (e) {
             console.log(e);
         }
+    };
+
+    const queryScheduledCards = async date => {
+        const cards = [];
+
+        await client
+            .query(q.Map(q.Paginate(q.Match(q.Index('scheduled_date'), date)), q.Lambda('card', q.Get(q.Var('card')))))
+            .then(ret => {
+                const retData = ret.data;
+                retData.forEach(el => cards.push(el));
+            })
+            .catch(e => console.log(e));
+
+        return cards;
+    };
+
+    // * populate the scheduled card data
+    const processCardsFromDb = async cards => {
+        // * use map with Promise.all to return the array asynchronously
+        const promises = cards.map(async card => {
+            const cardData = await getCardById(card.data.cardID);
+            return cardData;
+        });
+        const results = await Promise.all(promises);
+        return results;
     };
 
     // * add all cards that were not put into the 'Done' list to today's scheduled board
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
         const toDo = findList(lists, 'To Do');
-        // TODO : get scheduled cards for today
-        client.query(
-            q.Get(
-                q.Ref(q.Collection('SCHEDULED_CARDS'),'266362958579237395')
-            )
-        )
-            .then((ret) => console.log(ret))
+        const date = moment();
+        const formattedDate = date.format('YYYY-MM-DD');
+
+        // * get scheduled cards for today
+        const cardsFromDB = await queryScheduledCards(formattedDate);
+        const scheduledCards = await processCardsFromDb(cardsFromDB);
+        scheduledCards.forEach(async card => {
+            await addCardToList(card, toDo);
+        });
 
         pendingLists.forEach(async list => {
             const cards = await getCards(list);
-
             cards.forEach(async card => {
                 await addCardToList(card, toDo);
             });

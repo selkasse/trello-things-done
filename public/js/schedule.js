@@ -1,11 +1,9 @@
-const saveToFauna = function(data){
+const saveToFauna = function(data) {
     return fetch('/.netlify/functions/saveScheduledCard', {
         body: JSON.stringify(data),
-        method: 'POST'
-    }).then(response => {
-        return response.json()
-    })
-}
+        method: 'POST',
+    }).then(response => response.json());
+};
 
 // eslint-disable-next-line no-undef
 const t = TrelloPowerUp.iframe();
@@ -19,8 +17,8 @@ window.schedule.addEventListener('submit', function(event) {
     const data = {
         boardID: t.getContext().board,
         cardID: t.getContext().card,
-        date
-    }
+        date,
+    };
     // console.log(data);
     saveToFauna(data);
     // * Set the scheduled date for the card
@@ -31,7 +29,6 @@ window.schedule.addEventListener('submit', function(event) {
 
 // * When schedule.html is rendered, display the current value of the scheduled date
 t.render(function() {
-
     return (
         t
             .get('card', 'shared', 'schedule')
