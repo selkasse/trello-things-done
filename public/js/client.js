@@ -148,11 +148,6 @@ TrelloPowerUp.initialize({
             const masterShortUrl = splitMaster[0];
             const currentShortUrl = await t.get('member', 'shared', 'currentShortUrl');
 
-            console.log(t.getContext().board);
-            console.log(masterBoard);
-            console.log(masterShortUrl);
-            console.log(currentShortUrl);
-
             const isMaster = currentShortUrl === masterShortUrl;
             return [
                 {
@@ -184,7 +179,6 @@ TrelloPowerUp.initialize({
     },
     // * only show card detail badges if master board
     'card-detail-badges': function(t) {
-
         return t.get('member', 'shared', 'masterBoard').then(async function(masterBoard) {
             const splitMaster = masterBoard.split(',');
             const masterShortUrl = splitMaster[0];
