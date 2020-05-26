@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Pull in Trello styling -->
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css" />
+    <style>
+        select {
+            height: 30px;
+        }
+
+        .masterText {
+            font-size: 10px;
+
+        }
+    </style>
+    <!-- pull in the Trello Power-Up API -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+</head>
+</head>
+
+<body>
+    <form id="repeatable">
+        <script type="module" src="./js/repeatable.js"></script>
+        <!-- pull in user's GTD-enabled boards in master.js -->
+        <label class="repeatText" for="repeatSchedule">Choose a board that has the GTD powerup enabled</label>
+
+        <select name="repeatSchedule" id="repeatSchedule">
+            <option value="daily">Daily</option>
+            <option value="perWeek">x Times per Week</option>
+            <option value="perMonth">x Times per Month</option>
+
+        </select>
+        <button type="submit" class="mod-primary">Save</button>
+    </form>
+</body>
+
+</html>
