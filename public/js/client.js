@@ -14,7 +14,7 @@ const onDetailBtnClick = function(t) {
 
 const onCardBtnClick = function(t) {
     return t.popup({
-        title: 'Add to future board',
+        title: 'Make this card repeatable',
         url: '/public/repeatable.html',
     });
 };
