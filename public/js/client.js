@@ -152,7 +152,7 @@ TrelloPowerUp.initialize({
             return [
                 {
                     icon: isMaster ? CHECK_MARK_ICON : null,
-                    text: isMaster ? 'GTD' : null,
+                    text: isMaster ? 'TTD' : null,
                     callback: onCardBtnClick,
                 },
             ];
