@@ -5,10 +5,17 @@ const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png
 const MASTER_ICON_DARK = 'https://img.icons8.com/material/96/000000/master.png';
 const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/master.png';
 
-const onCardBtnClick = function(t) {
+const onDetailBtnClick = function(t) {
     return t.popup({
         title: 'Add to future board',
         url: '/public/schedule.html',
+    });
+};
+
+const onCardBtnClick = function(t) {
+    return t.popup({
+        title: 'Add to future board',
+        url: '/public/repeatable.html',
     });
 };
 
@@ -192,7 +199,7 @@ TrelloPowerUp.initialize({
                             title: 'Schedule',
                             color: schedule ? 'green' : 'blue',
                             text: schedule ? `Scheduled for ${schedule}` : 'Schedule for a future board',
-                            callback: onCardBtnClick,
+                            callback: onDetailBtnClick,
                         },
                     ];
                 });
