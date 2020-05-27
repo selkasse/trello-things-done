@@ -47,15 +47,37 @@
 
     <form id="weekly" class="weeklyForm">
     
-        <label class="text" for="weeklySchedule">Choose up to 6 days</label>
+        <!-- <label class="text" for="weeklySchedule">Choose up to 6 days</label> -->
     
         <!-- <select name="weeklySchedule" id="weeklySchedule"> -->
-        <label for="mondays">Mondays</label><br>
+
+        <!-- <label for="mondays">Mondays</label><br>
         <input type="checkbox" class="weekly" name="mondays" value="Mondays">
         <label for="tuesdays">Tuesdays</label><br>
         <input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays">
         <label for="wednesdays">Wednesdays</label><br>
-        <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays">
+        <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays"> -->
+
+        <table style="width:100%">
+            <!-- <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr> -->
+            <tr>
+                <td>Mondays</td>
+                <td><input type="checkbox" class="weekly" name="mondays" value="Mondays"></td>
+            </tr>
+            <tr>
+                <td>Tuesdays</td>
+                <td><input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays"></td>
+            </tr>
+            <tr>
+                <td>Wednesdays</td>
+                <td><input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays"></td>
+            </tr>
+        </table>
+
         <!-- </select> -->
         <button type="submit" class="mod-primary">Save</button>
     </form>
