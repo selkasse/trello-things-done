@@ -10,10 +10,15 @@
             height: 30px;
         }
 
-        .masterText {
+        .repeatText {
             font-size: 10px;
 
         }
+
+        /* .weeklyForm {
+            display:none;
+        } */
+
     </style>
     <!-- pull in the Trello Power-Up API -->
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
@@ -35,15 +40,18 @@
         <button type="submit" class="mod-primary">Save</button>
     </form>
 
-    <form id="weekly">
+    <form id="weekly" class="weeklyForm">
     
-        <label class="repeatText" for="repeatSchedule">Weekly</label>
+        <label class="weeklyText" for="weeklySchedule">Weekly</label>
     
-        <select name="weeklySchedule" id="weeklySchedule">
-            <option value="test1">Test 1</option>
-            <option value="test2">Test 2</option>
-            <option value="test3">Test 3</option>
-    
+        <select name="weeklySchedule" id="weeklySchedule" multiple>
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>    
         </select>
         <button type="submit" class="mod-primary">Save</button>
     </form>
