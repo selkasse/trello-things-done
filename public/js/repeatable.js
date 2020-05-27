@@ -8,5 +8,5 @@ const t = TrelloPowerUp.iframe();
 
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
-    console.log(window.repeatable.value);
+    console.log(window.repeatSchedule.value);
 });
