@@ -25,18 +25,15 @@ t.render(async function() {
 
     try {
         const configResponse = await t.get('organization', 'shared', 'config', 'not set');
-        // boards = JSON.stringify(configResponse);
         boards = configResponse;
     } catch (e) {
         console.log(e);
     }
-    // console.log(boards);
     const select = document.getElementById('masterBoard');
     boards.forEach(board => {
         const option = document.createElement('option');
         option.value = `${board.shortUrl},${board.id}`;
         option.text = board.name;
-        // console.log(option);
         const splitMaster = masterBoard.split(',');
         const masterShortUrl = splitMaster[0];
         if (masterShortUrl === board.shortUrl) {
@@ -46,16 +43,4 @@ t.render(async function() {
         select.add(option);
     });
     t.sizeTo('#master').done();
-    // for (let i = 0; i < boards.length; i += 1) {
-    //     // console.log(boards[i]);
-
-    //     const option = document.createElement('option');
-    //     option.value = boards[i].shortUrl;
-    //     option.text = boards[i].name;
-    //     if (masterBoard === boards[i].shortUrl) {
-    //         option.selected = true;
-    //         option.text += ' ✔️';
-    //     }
-    //     select.add(option);
-    // }
 });

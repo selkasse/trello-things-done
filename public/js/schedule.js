@@ -10,16 +10,13 @@ const t = TrelloPowerUp.iframe();
 window.schedule.addEventListener('submit', function(event) {
     // * Stop the browser trying to submit the form itself.
     event.preventDefault();
-    // console.log(t.getContext().board);
-    // console.log(t.getContext().card);
+
     const date = window.scheduledCard.value;
-    // console.log(date);
     const data = {
         boardID: t.getContext().board,
         cardID: t.getContext().card,
         date,
     };
-    // console.log(data);
     saveToFauna(data);
     // * Set the scheduled date for the card
     return t.set('card', 'shared', 'schedule', window.scheduledCard.value).then(function() {
