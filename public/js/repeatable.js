@@ -9,9 +9,12 @@ const t = TrelloPowerUp.iframe();
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
     console.log(window.repeatSchedule.value);
-    if (window.repeatSchedule.value === 'perWeek') {
-        t.render(function() {
-            const option = document.createElement('option');
-        });
-    }
+    // if (window.repeatSchedule.value === 'perWeek') {
+
+    // }
+});
+
+t.render(function() {
+    // const option = document.createElement('option');
+    t.sizeTo('#weekly').done();
 });
