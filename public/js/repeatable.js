@@ -7,5 +7,6 @@ const t = TrelloPowerUp.iframe();
 // TODO: if 'x times per month', render a multiselect calendar input where the user can pick up to 10
 
 window.repeatable.addEventListener('submit', function(event) {
+    event.preventDefault();
     console.log(window.repeatable.value);
 });
