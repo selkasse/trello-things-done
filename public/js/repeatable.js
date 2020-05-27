@@ -16,5 +16,5 @@ window.repeatable.addEventListener('submit', function(event) {
 
 t.render(function() {
     // const option = document.createElement('option');
-    t.sizeTo('#weekly').done();
+    t.sizeTo('#repeatable').done();
 });
