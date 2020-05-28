@@ -33,6 +33,7 @@ window.repeatable.addEventListener('submit', function(event) {
         weeklyForm.classList.add('weeklyForm');
         dailyDescription.classList.add('dailyDescription');
         generalDescription.classList.remove('generalDescription');
+        t.sizeTo('#container').done();
     }
 });
 
