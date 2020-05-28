@@ -27,9 +27,10 @@
 
         } */
 
-        /* .weeklyForm {
-            display:none;
-        } */
+        .weeklyForm {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
 
     </style>
     <!-- pull in the Trello Power-Up API -->
@@ -56,36 +57,16 @@
     
         <!-- <label class="text" for="weeklySchedule">Choose up to 6 days</label> -->
     
-        <!-- <select name="weeklySchedule" id="weeklySchedule"> -->
 
-        <!-- <label for="mondays">Mondays</label><br>
+        <label for="mondays">Mondays</label><br>
         <input type="checkbox" class="weekly" name="mondays" value="Mondays">
         <label for="tuesdays">Tuesdays</label><br>
         <input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays">
         <label for="wednesdays">Wednesdays</label><br>
-        <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays"> -->
+        <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays">
 
-        <table cellpadding="0" cellspacing="0">
-            <!-- <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
-            </tr> -->
-            <tr>
-                <td>Mondays</td>
-                <td><input type="checkbox" class="weekly" name="mondays" value="Mondays"></td>
-            </tr>
-            <tr>
-                <td>Tuesdays</td>
-                <td><input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays"></td>
-            </tr>
-            <tr>
-                <td>Wednesdays</td>
-                <td><input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays"></td>
-            </tr>
-        </table>
+       
 
-        <!-- </select> -->
         <button type="submit" class="mod-primary">Save</button>
     </form>
 </body>
