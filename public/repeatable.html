@@ -19,6 +19,11 @@
 
         .weekly {
             /* border: none; */
+            grid-area: checkbox;
+        }
+
+        .dayLabel {
+            grid-area: label;
         }
 /* 
         #weeklySchedule {
@@ -30,6 +35,8 @@
         .weeklyForm {
             display: grid;
             grid-template-columns: 1fr 3fr;
+            grid-template-areas: 
+            "label checkbox";
         }
 
     </style>
@@ -58,13 +65,13 @@
         <!-- <label class="text" for="weeklySchedule">ehh Choose up to 6 days</label> -->
     
 
-        <label for="mondays">Mondays</label><br>
+        <label for="mondays" class="dayLabel">Mondays</label><br>
         <input type="checkbox" class="weekly" name="mondays" value="Mondays">
 
-        <label for="tuesdays">Tuesdays</label><br>
+        <label for="tuesdays" class="dayLabel">Tuesdays</label><br>
         <input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays">
 
-        <label for="wednesdays">Wednesdays</label><br>
+        <label for="wednesdays" class="dayLabel">Wednesdays</label><br>
         <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays">
 
        
