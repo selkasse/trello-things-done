@@ -36,6 +36,7 @@
     "browserify": "^16.5.1",
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
+    "encoding": "^0.1.12",
     "express": "^4.17.1",
     "faunadb": "^2.14.1",
     "flatted": "^2.0.2",
