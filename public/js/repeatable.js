@@ -10,7 +10,7 @@ window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
     console.log(window.repeatSchedule.value);
     if (window.repeatSchedule.value === 'selectDays') {
-        const weeklyForm = document.querySelector('weeklyForm');
+        const weeklyForm = document.getElementById('weekly');
         weeklyForm.classList.remove('weeklyForm');
         weeklyForm.classList.add('weeklyFormActive');
     }
