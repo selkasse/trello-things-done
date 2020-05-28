@@ -41,6 +41,7 @@
     "flatted": "^2.0.2",
     "moment": "^2.25.3",
     "moment-timezone": "^0.5.28",
+    "netlify": "^4.1.7",
     "netlify-lambda": "^1.6.3",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0"
