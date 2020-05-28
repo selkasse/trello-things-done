@@ -9,10 +9,12 @@ const t = TrelloPowerUp.iframe();
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
     const weeklyForm = document.getElementById('weekly');
+    const dailyDescription = document.getElementById('dailyDescription');
     console.log(window.repeatSchedule.value);
     if (window.repeatSchedule.value === 'selectDays') {
         weeklyForm.classList.remove('weeklyForm');
         weeklyForm.classList.add('weeklyFormActive');
+        dailyDescription.classList.add('dailyDescription');
         t.sizeTo('#container').done();
     }
     if (window.repeatSchedule.value === 'daily') {

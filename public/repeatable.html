@@ -23,6 +23,12 @@
             height: 100%;
         }
 
+        .dailyDescription {
+            display: none;
+        }
+
+
+
 
     </style>
     <!-- pull in the Trello Power-Up API -->
@@ -45,6 +51,9 @@
             </select> 
             <button type="submit" class="mod-primary">Go!</button>
         </form>
+        <div id="dailyDescription"> 
+            Choosing the 'Daily' option will create a card for each daily board.
+        </div>
         <form id="weekly" class="weeklyForm">
             <br />
             <ul>
