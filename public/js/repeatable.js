@@ -19,6 +19,7 @@ window.repeatable.addEventListener('submit', function(event) {
     }
     if (window.repeatSchedule.value === 'daily') {
         weeklyForm.classList.add('weeklyForm');
+        dailyDescription.classList.remove('dailyDescription');
         t.sizeTo('#container').done();
     }
 });
