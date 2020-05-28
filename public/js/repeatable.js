@@ -10,17 +10,29 @@ window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
     const weeklyForm = document.getElementById('weekly');
     const dailyDescription = document.getElementById('dailyDescription');
+    const generalDescription = document.getElementById('generalDescription');
+
     console.log(window.repeatSchedule.value);
     if (window.repeatSchedule.value === 'selectDays') {
         weeklyForm.classList.remove('weeklyForm');
         weeklyForm.classList.add('weeklyFormActive');
+
         dailyDescription.classList.add('dailyDescription');
+        generalDescription.classList.add('generalDescription');
+
         t.sizeTo('#container').done();
     }
     if (window.repeatSchedule.value === 'daily') {
         weeklyForm.classList.add('weeklyForm');
+        generalDescription.classList.add('generalDescription');
+
         dailyDescription.classList.remove('dailyDescription');
         t.sizeTo('#container').done();
+    }
+    if (window.repeatSchedule.value === 'general') {
+        weeklyForm.classList.add('weeklyForm');
+        dailyDescription.classList.add('dailyDescription');
+        generalDescription.classList.remove('generalDescription');
     }
 });
 
