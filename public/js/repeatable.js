@@ -13,7 +13,7 @@ window.repeatable.addEventListener('submit', function(event) {
         const weeklyForm = document.getElementById('weekly');
         weeklyForm.classList.remove('weeklyForm');
         weeklyForm.classList.add('weeklyFormActive');
-        t.render();
+        t.sizeTo('#container').done();
     }
 });
 
