@@ -9,9 +9,11 @@ const t = TrelloPowerUp.iframe();
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
     console.log(window.repeatSchedule.value);
-    // if (window.repeatSchedule.value === 'perWeek') {
-
-    // }
+    if (window.repeatSchedule.value === 'selectDays') {
+        const weeklyForm = document.querySelector('weeklyForm');
+        weeklyForm.classList.remove('weeklyForm');
+        weeklyForm.classList.add('weeklyFormActive');
+    }
 });
 
 t.render(function() {
