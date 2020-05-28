@@ -13,35 +13,7 @@
         .text {
             font-size: 10px;
         }
-        table {
-            border-collapse: collapse;
-        }
 
-        .weekly {
-            /* border: none; */
-            grid-area: checkbox;
-        }
-
-        .dayLabel {
-            grid-area: label;
-        }
-/* 
-        #weeklySchedule {
-            height: 100%;
-            width: 60%;
-
-        } */
-
-        .checkboxContainer {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            grid-template-rows: 10px;
-            grid-template-areas: 
-            "checkbox label"
-            "checkbox label"
-            "checkbox label"
-           
-        }
 
     </style>
     <!-- pull in the Trello Power-Up API -->
@@ -68,17 +40,23 @@
     
         <!-- <label class="text" for="weeklySchedule">ehh Choose up to 6 days</label> -->
     
-        <div class="checkboxContainer">
+        <!-- <div class="checkboxContainer"> -->
 
-            <label for="mondays" class="dayLabel">Mondays</label>
-            <input type="checkbox" class="weekly" name="mondays" value="Mondays">
-    
-            <label for="tuesdays" class="dayLabel">Tuesdays</label>
-            <input type="checkbox" class="weekly" name="tuesdays" value="Tuesdays">
-    
-            <label for="wednesdays" class="dayLabel">Wednesdays</label>
-            <input type="checkbox" class="weekly" name="wednesdays" value="Wednesdays">
-        </div>
+        <!-- <label for="mondays" class="dayLabel">Mondays</label>
+        <input type="checkbox" name="mondays" value="Mondays">
+
+        <label for="tuesdays" class="dayLabel">Tuesdays</label>
+        <input type="checkbox" name="tuesdays" value="Tuesdays">
+
+        <label for="wednesdays" class="dayLabel">Wednesdays</label>
+        <input type="checkbox" name="wednesdays" value="Wednesdays"> -->
+        <!-- </div> -->
+
+        <ul>
+            <li><input type="checkbox" name="mondays" value="Mondays">Mondays</li>
+            <li><input type="checkbox" name="tuesdays" value="Tuesdays">Tuesdays</li>
+            <li><input type="checkbox" name="wednesdays" value="Wednesdays">Wednesdays</li>
+        </ul>
 
         <button type="submit" class="mod-primary">Save</button>
     </form>
