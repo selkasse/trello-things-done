@@ -43,6 +43,10 @@
             font-size: 10px;
         }
 
+        .dayCheckbox {
+            -webkit-appearance: none;
+        }
+
 
     </style>
     <!-- pull in the Trello Power-Up API -->
@@ -69,19 +73,19 @@
             Choosing the 'Daily' option will create a card for each daily board.
         </div>
         <div id="generalDescription" class="generalDescription">
-            Choosing the 'General' option prevent this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
+            Choosing the 'General' option prevents this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
         </div>
         <!-- <form id="weekly" class="weeklyForm"> -->
         <div id="weekly" class="weeklyForm">
 
             <ul>
-                <li><input type="checkbox" name="mondays" value="Mondays">Mondays</li>
-                <li><input type="checkbox" name="tuesdays" value="Tuesdays">Tuesdays</li>
-                <li><input type="checkbox" name="wednesdays" value="Wednesdays">Wednesdays</li>
-                <li><input type="checkbox" name="thursdays" value="Thursdays">Thursdays</li>
-                <li><input type="checkbox" name="fridays" value="Fridays">Fridays</li>
-                <li><input type="checkbox" name="saturdays" value="Saturdays">Saturdays</li>
-                <li><input type="checkbox" name="sundays" value="Sundays">Sundays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="mondays" value="Mondays">Mondays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="tuesdays" value="Tuesdays">Tuesdays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="wednesdays" value="Wednesdays">Wednesdays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="thursdays" value="Thursdays">Thursdays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="fridays" value="Fridays">Fridays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="saturdays" value="Saturdays">Saturdays</li>
+                <li><input type="checkbox" class="dayCheckbox" name="sundays" value="Sundays">Sundays</li>
     
             </ul>
         </div>
