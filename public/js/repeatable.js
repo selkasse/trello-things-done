@@ -45,14 +45,16 @@ window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const mondays = document.getElementById('mondays').checked;
-    const tuesdays = document.getElementById('tuesdays');
-    const wednesdays = document.getElementById('wednesdays');
-    const thursdays = document.getElementById('thursdays');
-    const fridays = document.getElementById('fridays');
-    const saturdays = document.getElementById('saturdays');
-    const sundays = document.getElementById('sundays');
+    const tuesdays = document.getElementById('tuesdays').checked;
+    const wednesdays = document.getElementById('wednesdays').checked;
+    const thursdays = document.getElementById('thursdays').checked;
+    const fridays = document.getElementById('fridays').checked;
+    const saturdays = document.getElementById('saturdays').checked;
+    const sundays = document.getElementById('sundays').checked;
 
-    console.log(mondays);
+    const days = { mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays };
+
+    console.log(days);
 });
 
 t.render(function() {
