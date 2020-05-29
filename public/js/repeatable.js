@@ -17,7 +17,7 @@ window.repeatable.addEventListener('click', function(event) {
     if (window.repeatSchedule.value === 'selectDays') {
         button.innerHTML = 'Set these days';
         weeklyForm.classList.remove('weeklyForm');
-        weeklyForm.classList.add('weeklyFormActive');
+        // weeklyForm.classList.add('weeklyFormActive');
 
         dailyDescription.classList.add('dailyDescription');
         generalDescription.classList.add('generalDescription');
