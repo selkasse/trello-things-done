@@ -57,41 +57,44 @@
 
 <body>
     <script type="module" src="./js/repeatable.js"></script>
-    <div id="container" class="pop-over-content js-pop-over-content u-fancy-scrollbar js-tab-parent">
-        <form id="repeatable">
-    
-            <label class="text" for="repeatSchedule">Choose the frequency for this card</label>
-    
-            <select class="js-select-position" name="repeatSchedule" id="repeatSchedule">
-                <option value="daily">Daily</option>
-                <option value="selectDays">Select Days</option>
-                <option value="general">General</option>
-    
-            </select> 
-            <button id="btn" type="submit" class="mod-primary">Make Daily</button>
-        <!-- </form> -->
-        <div id="dailyDescription"> 
-            Choosing the 'Daily' option will create a card for each daily board.
-        </div>
-        <div id="generalDescription" class="generalDescription">
-            Choosing the 'General' option prevents this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
-        </div>
-        <!-- <form id="weekly" class="weeklyForm"> -->
-        <div id="weekly" class="weeklyForm">
+    <div id="container" class="form-grid">
+        <div class="button-link setting form-grid-child form-grid-child-full">
 
-            <ul>
-                <li><input type="checkbox" name="mondays" value="Mondays">Mondays</li>
-                <li><input type="checkbox" name="tuesdays" value="Tuesdays">Tuesdays</li>
-                <li><input type="checkbox" name="wednesdays" value="Wednesdays">Wednesdays</li>
-                <li><input type="checkbox" name="thursdays" value="Thursdays">Thursdays</li>
-                <li><input type="checkbox" name="fridays" value="Fridays">Fridays</li>
-                <li><input type="checkbox" name="saturdays" value="Saturdays">Saturdays</li>
-                <li><input type="checkbox" name="sundays" value="Sundays">Sundays</li>
+            <form id="repeatable">
+        
+                <label class="text" for="repeatSchedule">Choose the frequency for this card</label>
+        
+                <select class="js-select-position" name="repeatSchedule" id="repeatSchedule">
+                    <option value="daily">Daily</option>
+                    <option value="selectDays">Select Days</option>
+                    <option value="general">General</option>
+        
+                </select> 
+                <button id="btn" type="submit" class="mod-primary">Make Daily</button>
+            <!-- </form> -->
+            <div id="dailyDescription"> 
+                Choosing the 'Daily' option will create a card for each daily board.
+            </div>
+            <div id="generalDescription" class="generalDescription">
+                Choosing the 'General' option prevents this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
+            </div>
+            <!-- <form id="weekly" class="weeklyForm"> -->
+            <div id="weekly" class="weeklyForm">
     
-            </ul>
+                <ul>
+                    <li><input type="checkbox" name="mondays" value="Mondays">Mondays</li>
+                    <li><input type="checkbox" name="tuesdays" value="Tuesdays">Tuesdays</li>
+                    <li><input type="checkbox" name="wednesdays" value="Wednesdays">Wednesdays</li>
+                    <li><input type="checkbox" name="thursdays" value="Thursdays">Thursdays</li>
+                    <li><input type="checkbox" name="fridays" value="Fridays">Fridays</li>
+                    <li><input type="checkbox" name="saturdays" value="Saturdays">Saturdays</li>
+                    <li><input type="checkbox" name="sundays" value="Sundays">Sundays</li>
+        
+                </ul>
+            </div>
+                <!-- <button type="submit" class="mod-primary">Choose these days</button> -->
+            </form>
         </div>
-            <!-- <button type="submit" class="mod-primary">Choose these days</button> -->
-        </form>
 
     </div>
 </body>
