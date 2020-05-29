@@ -22,7 +22,7 @@ window.repeatable.addEventListener('click', function(event) {
         dailyDescription.classList.add('dailyDescription');
         generalDescription.classList.add('generalDescription');
 
-        t.sizeTo('#container').done();
+        // t.sizeTo('#container').done();
     }
     if (window.repeatSchedule.value === 'daily') {
         button.innerHTML = 'Make Daily';
