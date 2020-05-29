@@ -11,7 +11,6 @@ window.repeatable.addEventListener('click', function(event) {
     const dailyDescription = document.getElementById('dailyDescription');
     const generalDescription = document.getElementById('generalDescription');
     const button = document.getElementById('btn');
-    const mondays = document.getElementById('mondays');
 
     // console.log(window.repeatSchedule.value);
     if (window.repeatSchedule.value === 'selectDays') {
@@ -26,7 +25,6 @@ window.repeatable.addEventListener('click', function(event) {
     }
     if (window.repeatSchedule.value === 'daily') {
         button.innerHTML = 'Make Daily';
-        console.log(mondays.checked);
         weeklyForm.classList.add('weeklyForm');
         generalDescription.classList.add('generalDescription');
 
@@ -45,7 +43,16 @@ window.repeatable.addEventListener('click', function(event) {
 
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
-    console.log(window.repeatSchedule.value);
+
+    const mondays = document.getElementById('mondays').checked;
+    const tuesdays = document.getElementById('tuesdays');
+    const wednesdays = document.getElementById('wednesdays');
+    const thursdays = document.getElementById('thursdays');
+    const fridays = document.getElementById('fridays');
+    const saturdays = document.getElementById('saturdays');
+    const sundays = document.getElementById('sundays');
+
+    console.log(mondays);
 });
 
 t.render(function() {
