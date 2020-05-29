@@ -2,6 +2,7 @@
 const { Promise } = TrelloPowerUp;
 
 const CHECK_MARK_ICON = 'https://img.icons8.com/material/24/000000/check-all.png';
+const REPEAT_ICON = 'https://img.icons8.com/material-two-tone/24/000000/repeat.png';
 const MASTER_ICON_DARK = 'https://img.icons8.com/material/96/000000/master.png';
 const MASTER_ICON_LIGHT = 'https://img.icons8.com/material-outlined/96/000000/master.png';
 
@@ -158,7 +159,7 @@ TrelloPowerUp.initialize({
             const isMaster = currentShortUrl === masterShortUrl;
             return [
                 {
-                    icon: isMaster ? CHECK_MARK_ICON : null,
+                    icon: isMaster ? REPEAT_ICON : null,
                     text: isMaster ? 'TTD' : null,
                     callback: onCardBtnClick,
                 },
