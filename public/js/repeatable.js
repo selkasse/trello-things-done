@@ -11,7 +11,7 @@ window.repeatable.addEventListener('click', function(event) {
     const dailyDescription = document.getElementById('dailyDescription');
     const generalDescription = document.getElementById('generalDescription');
     const button = document.getElementById('btn');
-    const ul = document.getElementById('days');
+    const mondays = document.getElementById('mondays');
 
     // console.log(window.repeatSchedule.value);
     if (window.repeatSchedule.value === 'selectDays') {
@@ -26,7 +26,7 @@ window.repeatable.addEventListener('click', function(event) {
     }
     if (window.repeatSchedule.value === 'daily') {
         button.innerHTML = 'Make Daily';
-        console.log(ul);
+        console.log(mondays);
         weeklyForm.classList.add('weeklyForm');
         generalDescription.classList.add('generalDescription');
 
