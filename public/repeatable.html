@@ -19,10 +19,6 @@
             height: 100%;
         }
 
-        .weeklyFormActive {
-            height: 100%;
-        }
-
         .dailyDescription {
             display: none;
         }
@@ -43,11 +39,6 @@
             font-size: 10px;
         }
 
-        /* .dayCheckbox {
-            appearance: none;         
-	        display: none;
-        } */
-
 
     </style>
     <!-- pull in the Trello Power-Up API -->
@@ -57,8 +48,7 @@
 
 <body>
     <script type="module" src="./js/repeatable.js"></script>
-    <div id="container" class="form-grid">
-        <!-- <div class="button-link setting form-grid-child form-grid-child-full"> -->
+    <div id="container">
 
         <form id="repeatable">
     
@@ -71,14 +61,12 @@
     
             </select> 
             <button id="btn" type="submit" class="mod-primary">Make Daily</button>
-        <!-- </form> -->
         <div id="dailyDescription"> 
             Choosing the 'Daily' option will create a card for each daily board.
         </div>
         <div id="generalDescription" class="generalDescription">
             Choosing the 'General' option prevents this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
         </div>
-        <!-- <form id="weekly" class="weeklyForm"> -->
         <div id="weekly" class="weeklyForm">
 
             <ul>
