@@ -44,6 +44,7 @@ window.repeatable.addEventListener('click', function(event) {
 
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
+    console.log(window.repeatSchedule.value);
 });
 
 t.render(function() {
