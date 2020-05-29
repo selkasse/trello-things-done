@@ -38,6 +38,9 @@
         ul li{
             font-size: 10px;
         }
+        .class {
+            color: red;
+        }
 
 
     </style>
@@ -53,8 +56,8 @@
         <form id="repeatable">
     
             <label class="text" for="repeatSchedule">Choose the frequency for this card</label>
-            <div>Error will go here</div>
-            <select class="js-select-position" name="repeatSchedule" id="repeatSchedule">
+            <label class="error" for="repeatSchedule">You must select at least one day</label>
+            <select name="repeatSchedule" id="repeatSchedule">
                 <option value="daily">Daily</option>
                 <option value="selectDays">Select Days</option>
                 <option value="general">General</option>
