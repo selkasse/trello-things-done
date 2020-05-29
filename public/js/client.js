@@ -160,7 +160,7 @@ TrelloPowerUp.initialize({
             return [
                 {
                     icon: isMaster ? REPEAT_ICON : null,
-                    text: isMaster ? 'TTD' : null,
+                    text: isMaster ? 'Repeatable Card' : null,
                     callback: onCardBtnClick,
                 },
             ];
