@@ -44,21 +44,23 @@ window.repeatable.addEventListener('click', function(event) {
 window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const mondays = document.getElementById('mondays').checked;
-    const tuesdays = document.getElementById('tuesdays').checked;
-    const wednesdays = document.getElementById('wednesdays').checked;
-    const thursdays = document.getElementById('thursdays').checked;
-    const fridays = document.getElementById('fridays').checked;
-    const saturdays = document.getElementById('saturdays').checked;
-    const sundays = document.getElementById('sundays').checked;
+    if (window.repeatSchedule.value === 'selectDays') {
+        const mondays = document.getElementById('mondays').checked;
+        const tuesdays = document.getElementById('tuesdays').checked;
+        const wednesdays = document.getElementById('wednesdays').checked;
+        const thursdays = document.getElementById('thursdays').checked;
+        const fridays = document.getElementById('fridays').checked;
+        const saturdays = document.getElementById('saturdays').checked;
+        const sundays = document.getElementById('sundays').checked;
 
-    const days = { mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays };
-    const daysArray = Object.values(days);
-    const oneBoxChecked = daysArray.find(checked => checked === true);
-    if (oneBoxChecked) {
-        console.log('at least one day was selected');
-    } else {
-        console.log('no days were selected');
+        const days = { mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays };
+        const daysArray = Object.values(days);
+        const oneBoxChecked = daysArray.find(checked => checked === true);
+        if (oneBoxChecked) {
+            console.log('at least one day was selected');
+        } else {
+            console.log('no days were selected');
+        }
     }
 });
 
