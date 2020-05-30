@@ -45,8 +45,6 @@ window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const error = document.getElementById('errorLabel');
-    error.classList.remove('error');
-    error.classList.add('hidden');
 
     if (window.repeatSchedule.value === 'selectDays') {
         const mondays = document.getElementById('mondays').checked;
@@ -61,6 +59,8 @@ window.repeatable.addEventListener('submit', function(event) {
         const daysArray = Object.values(days);
         const oneBoxChecked = daysArray.find(checked => checked === true);
         if (oneBoxChecked) {
+            error.classList.remove('error');
+            error.classList.add('hidden');
             console.log('at least one day was selected');
         } else {
             error.classList.remove('hidden');
