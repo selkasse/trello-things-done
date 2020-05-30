@@ -59,6 +59,8 @@ window.repeatable.addEventListener('submit', function(event) {
         const daysArray = Object.values(days);
         const oneBoxChecked = daysArray.find(checked => checked === true);
         if (oneBoxChecked) {
+            error.classList.remove('error');
+
             console.log('at least one day was selected');
         } else {
             error.classList.remove('hidden');
