@@ -53,8 +53,13 @@ window.repeatable.addEventListener('submit', function(event) {
     const sundays = document.getElementById('sundays').checked;
 
     const days = { mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays };
-
-    console.log(days);
+    const daysArray = Object.values(days);
+    const oneBoxChecked = daysArray.find(checked => checked === true);
+    if (oneBoxChecked) {
+        console.log('at least one day was selected');
+    } else {
+        console.log('no days were selected');
+    }
 });
 
 t.render(function() {
