@@ -59,6 +59,8 @@
         <form id="repeatable">
     
             <label class="text" for="repeatSchedule">Choose the frequency for this card</label>
+            <label id="errorLabel" class="hidden" for="repeatSchedule">You must select at least one day</label>
+
             <select name="repeatSchedule" id="repeatSchedule">
                 <option value="daily">Daily</option>
                 <option value="selectDays">Select Days</option>
@@ -73,7 +75,6 @@
             Choosing the 'General' option prevents this card from being deleted from the next board if it is moved to 'Done'. It can still be scheduled just like a non-repeatable card.
         </div>
         <div id="weekly" class="weeklyForm">
-            <label id="errorLabel" class="hidden" for="repeatSchedule">You must select at least one day</label>
 
             <ul id="days">
                 <li><input type="checkbox" name="mondays" id="mondays" value="Mondays">Mondays</li>
