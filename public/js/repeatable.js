@@ -45,7 +45,7 @@ window.repeatable.addEventListener('submit', function(event) {
     event.preventDefault();
 
     if (window.repeatSchedule.value === 'selectDays') {
-        const error = document.querySelector('errorLabel');
+        const error = document.getElementById('errorLabel');
 
         const mondays = document.getElementById('mondays').checked;
         const tuesdays = document.getElementById('tuesdays').checked;
