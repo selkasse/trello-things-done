@@ -67,6 +67,7 @@ window.repeatable.addEventListener('submit', function(event) {
             error.classList.add('error');
             console.log('no days were selected');
         }
+        t.sizeTo('#container').done();
     }
 });
 
