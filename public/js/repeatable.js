@@ -7,6 +7,8 @@ const t = TrelloPowerUp.iframe();
 // TODO: if 'x times per month', render a multiselect calendar input where the user can pick up to 10
 
 window.repeatable.addEventListener('click', function(event) {
+    const error = document.getElementById('errorLabel');
+
     const weeklyForm = document.getElementById('weekly');
     const dailyDescription = document.getElementById('dailyDescription');
     const generalDescription = document.getElementById('generalDescription');
@@ -24,6 +26,9 @@ window.repeatable.addEventListener('click', function(event) {
         t.sizeTo('#container').done();
     }
     if (window.repeatSchedule.value === 'daily') {
+        error.classList.remove('error');
+        error.classList.add('hidden');
+
         button.innerHTML = 'Make Daily';
         weeklyForm.classList.add('weeklyForm');
         generalDescription.classList.add('generalDescription');
@@ -32,6 +37,9 @@ window.repeatable.addEventListener('click', function(event) {
         t.sizeTo('#container').done();
     }
     if (window.repeatSchedule.value === 'general') {
+        error.classList.remove('error');
+        error.classList.add('hidden');
+
         button.innerHTML = 'Make General';
 
         weeklyForm.classList.add('weeklyForm');
