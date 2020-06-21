@@ -1,3 +1,5 @@
+import wait from 'waait';
+
 const cron = require('node-cron');
 const axios = require('axios');
 const moment = require('moment');
@@ -95,7 +97,46 @@ exports.handler = function(event, context, callback) {
         const results = await Promise.all(promises);
         return results;
     };
+    const moveLists = async (pendingLists, newBoard) => {
+        const lists = await getLists(newBoard);
+        const toDo = findList(lists, 'To Do');
 
+        let moveToDoListURL;
+        let moveQueuedListURL;
+        let moveDoingListURL;
+        // TODO : check if there is a card in the list before moving
+        pendingLists.forEach(async list => {
+            if (!moveToDoListURL) {
+                moveToDoListURL = `${LISTS_URL}/${list.id}/moveAllCards?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}&idBoard=${newBoard.id}&idList=${toDo.id}`;
+            } else if (!moveQueuedListURL) {
+                moveQueuedListURL = `${LISTS_URL}/${list.id}/moveAllCards?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}&idBoard=${newBoard.id}&idList=${toDo.id}`;
+            } else {
+                moveDoingListURL = `${LISTS_URL}/${list.id}/moveAllCards?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}&idBoard=${newBoard.id}&idList=${toDo.id}`;
+            }
+        });
+
+        const moveToDoRequest = axios.post(moveToDoListURL);
+        await wait(10000);
+        const moveQueuedRequest = axios.post(moveQueuedListURL);
+        await wait(10000);
+        const moveDoingRequest = axios.post(moveDoingListURL);
+
+        axios
+            .all([moveToDoRequest, moveQueuedRequest, moveDoingRequest])
+            .then(
+                axios.spread((...responses) => {
+                    const toDoResponse = responses[0];
+
+                    const queuedResponse = responses[1];
+
+                    const doingResponse = responses[2];
+                    // * use/access the results
+                })
+            )
+            .catch(errors => {
+                // * react on errors.
+            });
+    };
     // * add all cards that were not put into the 'Done' list to today's scheduled board
     const populateToDo = async (board, pendingLists) => {
         const lists = await getLists(board);
@@ -123,22 +164,23 @@ exports.handler = function(event, context, callback) {
     const makeBoardName = date => `TTD ${date.month() + 1}-${date.date()}-${date.year()}`;
 
     // * takes in pending items from yestrday's board, and creates a new board with the pending items in 'To Do'
-    const createBoard = async pendingLists => {
+    const createBoard = async () => {
         const today = moment();
         const boardName = makeBoardName(today);
         const URL = `
             ${BOARDS_URL}/?name=${boardName}&key=${TRELLO_KEY}&token=${TRELLO_TOKEN}
         `;
         // * create the board with a POST request
+        let board;
         await axios
             .post(URL)
             .then(async function(res) {
-                const board = res.data;
+                board = res.data;
                 // *  create the 'Queued' List, as the board comes with Todo/Doing/Done by default
                 await createList(board.id, 'Queued').catch(e => console.log(e));
-                await populateToDo(board, pendingLists).catch(e => console.log(e));
             })
             .catch(e => console.log(e));
+        return board;
     };
 
     // * returns the name of the board that was created automatically yesterday
@@ -162,7 +204,6 @@ exports.handler = function(event, context, callback) {
                 .catch(e => console.log(e));
 
             const memberBoards = boardsResponse.data;
-            console.log(`Printing memberBoards${memberBoards}`);
 
             for (let i = 0; i < memberBoards.length; i += 1) {
                 if (memberBoards[i].name === getYesterday()) {
@@ -201,17 +242,14 @@ exports.handler = function(event, context, callback) {
         return { doneList, pendingLists };
     };
 
-    const deleteBoard = async board => {
-        const URL = `${BOARDS_URL}/${board.id}?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
-        try {
-            await axios.delete(URL);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
     const deleteScheduledCardsFromDB = async date =>
         client.query(q.Delete(q.Select('ref', q.Get(q.Match(q.Index('scheduled_date'), date)))));
+
+    const closeBoard = async board => {
+        const URL = `${BOARDS_URL}/${board.id}?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}&closed=true`;
+
+        await axios.put(URL).catch(e => console.log(e));
+    };
 
     // * main logic for makeDailyBoards is housed in this function
     const makeBoards = async () => {
@@ -223,15 +261,17 @@ exports.handler = function(event, context, callback) {
         console.log('\x1b[42m', `RUNNING JOB AT 02:30 a.m. every day`, '\x1b[0m');
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
-        console.log(boardYesterday);
         if (boardYesterday) {
             // * get the lists from yesterday's board
             const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
-            // const doneCards = await getCards(doneList);
-            await createBoard(pendingLists);
-            await deleteBoard(boardYesterday);
+
+            const newBoard = await createBoard(pendingLists);
+            await wait(20000);
+            await moveLists(pendingLists, newBoard);
+            await wait(20000);
+            await closeBoard(boardYesterday);
         }
         // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
         const yesterday = moment().subtract(1, 'days');
