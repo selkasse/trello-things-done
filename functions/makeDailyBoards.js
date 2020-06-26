@@ -101,6 +101,8 @@ exports.handler = function(event, context, callback) {
         const lists = await getLists(newBoard);
         const toDo = findList(lists, 'To Do');
 
+        // console.log(`pendingLists: ${JSON.stringify(pendingLists)}`);
+
         let moveToDoListURL;
         let moveQueuedListURL;
         let moveDoingListURL;
@@ -115,6 +117,11 @@ exports.handler = function(event, context, callback) {
             }
         });
 
+        console.log(`
+            moveToDoListURL: ${moveToDoListURL}********* 
+            moveQueuedListURL: ${moveQueuedListURL}*********
+            moveDoingListURL: ${moveDoingListURL}*********
+        `);
         const moveToDoRequest = axios.post(moveToDoListURL);
         await wait(10000);
         const moveQueuedRequest = axios.post(moveQueuedListURL);
@@ -135,6 +142,7 @@ exports.handler = function(event, context, callback) {
             )
             .catch(errors => {
                 // * react on errors.
+                console.log(errors);
             });
     };
     // * add all cards that were not put into the 'Done' list to today's scheduled board
@@ -264,9 +272,9 @@ exports.handler = function(event, context, callback) {
         if (boardYesterday) {
             // * get the lists from yesterday's board
             const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
+            console.log(`listsYesterday: ${JSON.stringify(listsYesterday)}`);
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
-
             const newBoard = await createBoard(pendingLists);
             await wait(20000);
             await moveLists(pendingLists, newBoard);
