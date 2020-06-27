@@ -174,6 +174,7 @@ exports.handler = function(event, context, callback) {
 
     // * takes in pending items from yestrday's board, and creates a new board with the pending items in 'To Do'
     const createBoard = async () => {
+        console.log('entering createBoard');
         const today = moment();
         const boardName = makeBoardName(today);
         const URL = `
@@ -200,6 +201,7 @@ exports.handler = function(event, context, callback) {
 
     // * returns the board that was created automatically yesterday
     const getBoardYesterday = async () => {
+        console.log('entered getBoardYesterday');
         try {
             const config = {
                 headers: {
@@ -239,6 +241,7 @@ exports.handler = function(event, context, callback) {
 
     // * separates the 'Done' list from other lists on the board
     const splitLists = lists => {
+        console.log('entering splitLists');
         let doneList;
         const pendingLists = [];
         lists.forEach(list => {
@@ -271,14 +274,18 @@ exports.handler = function(event, context, callback) {
 
         const boardYesterday = await getBoardYesterday().catch(e => console.log(e));
         if (boardYesterday) {
+            console.log('there was a board yesterday, entering block')
             // * get the lists from yesterday's board
             const listsYesterday = await getLists(boardYesterday).catch(e => console.log(e));
             console.log(`listsYesterday: ${JSON.stringify(listsYesterday)}`);
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
+            console.log('just got back from splitLists');
             const newBoard = await createBoard(pendingLists);
+            console.log('just got back from createBoard')
             // await wait(3000);
             await moveLists(pendingLists, newBoard);
+            console.log('just got back from moveLists');
             // await wait(3000);
             await closeBoard(boardYesterday);
         }
