@@ -2,7 +2,8 @@ name: Cron # Name of our workflow
 
 on:
   schedule:
-    - cron: "30 6 * * *"
+    # - cron: "30 6 * * *"
+    - cron: "10 * * * * "
 
 jobs:
   callNetlify:

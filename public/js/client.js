@@ -103,7 +103,6 @@ TrelloPowerUp.initialize({
         let enabledBoards;
         const currentMember = t.getContext().member;
         const currentBoard = t.getContext().board;
-        console.log(t.getContext());
         const setShortUrlFromContext = async function() {
             try {
                 // const shortUrlContext = await t.get('member', 'shared', 'currentShortUrl', 'not set');
