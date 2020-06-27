@@ -294,15 +294,16 @@ exports.handler = function(event, context, callback) {
         const yesterday = moment().subtract(1, 'days');
         const formattedYesterday = yesterday.format('YYYY-MM-DD');
 
-        const cardsYesterday = await queryScheduledCards(formattedYesterday);
-        if (cardsYesterday.length > 0) {
-            console.log('there were cards scheduled for yesterday');
-            cardsYesterday.forEach(async () => {
-                await deleteScheduledCardsFromDB(formattedYesterday);
-            });
-        } else {
-            console.log('no cards scheduled for yesterday');
-        }
+        // const cardsYesterday = await queryScheduledCards(formattedYesterday);
+
+        // if (cardsYesterday.length > 0) {
+        //     console.log('there were cards scheduled for yesterday');
+        //     cardsYesterday.forEach(async () => {
+        //         await deleteScheduledCardsFromDB(formattedYesterday);
+        //     });
+        // } else {
+        //     console.log('no cards scheduled for yesterday');
+        // }
 
         send();
     };
