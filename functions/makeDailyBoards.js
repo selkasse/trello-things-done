@@ -258,10 +258,10 @@ exports.handler = function(event, context, callback) {
     const deleteScheduledCardsFromDB = async date =>
         client.query(q.Delete(q.Select('ref', q.Get(q.Match(q.Index('scheduled_date'), date)))));
 
-    const closeBoard = async board => {
-        const URL = `${BOARDS_URL}/${board.id}?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}&closed=true`;
+    const deleteBoard = async board => {
+        const URL = `${BOARDS_URL}/${board.id}?key=${TRELLO_KEY}&token=${TRELLO_TOKEN}`;
 
-        await axios.put(URL).catch(e => console.log(e));
+        await axios.delete(URL).catch(e => console.log(e));
     };
 
     // * main logic for makeDailyBoards is housed in this function
@@ -281,14 +281,14 @@ exports.handler = function(event, context, callback) {
             console.log(`listsYesterday: ${JSON.stringify(listsYesterday)}`);
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
-            await wait(500);
+            await wait(9000);
             console.log('just got back from splitLists');
             const newBoard = await createBoard(pendingLists);
             console.log('just got back from createBoard')
             await moveLists(pendingLists, newBoard);
             console.log('just got back from moveLists');
-            // await wait(3000);
-            await closeBoard(boardYesterday);
+            await wait(9000);
+            await deleteBoard(boardYesterday);
         }
         // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
         // const yesterday = moment().subtract(1, 'days');
