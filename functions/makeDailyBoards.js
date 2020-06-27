@@ -123,9 +123,9 @@ exports.handler = function(event, context, callback) {
             moveDoingListURL: ${moveDoingListURL}*********
         `);
         const moveToDoRequest = axios.post(moveToDoListURL);
-        await wait(10000);
+        await wait(3000);
         const moveQueuedRequest = axios.post(moveQueuedListURL);
-        await wait(10000);
+        await wait(3000);
         const moveDoingRequest = axios.post(moveDoingListURL);
 
         axios
