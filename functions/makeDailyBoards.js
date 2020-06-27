@@ -281,10 +281,10 @@ exports.handler = function(event, context, callback) {
             console.log(`listsYesterday: ${JSON.stringify(listsYesterday)}`);
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
+            await wait(500);
             console.log('just got back from splitLists');
             const newBoard = await createBoard(pendingLists);
             console.log('just got back from createBoard')
-            // await wait(3000);
             await moveLists(pendingLists, newBoard);
             console.log('just got back from moveLists');
             // await wait(3000);
