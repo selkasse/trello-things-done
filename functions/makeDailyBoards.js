@@ -123,9 +123,9 @@ exports.handler = function(event, context, callback) {
             moveDoingListURL: ${moveDoingListURL}*********
         `);
         const moveToDoRequest = axios.post(moveToDoListURL);
-        await wait(3000);
+        // await wait(3000);
         const moveQueuedRequest = axios.post(moveQueuedListURL);
-        await wait(3000);
+        // await wait(3000);
         const moveDoingRequest = axios.post(moveDoingListURL);
 
         axios
@@ -276,9 +276,9 @@ exports.handler = function(event, context, callback) {
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
             const newBoard = await createBoard(pendingLists);
-            await wait(3000);
+            // await wait(3000);
             await moveLists(pendingLists, newBoard);
-            await wait(3000);
+            // await wait(3000);
             await closeBoard(boardYesterday);
         }
         // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
