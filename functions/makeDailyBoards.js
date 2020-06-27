@@ -281,14 +281,14 @@ exports.handler = function(event, context, callback) {
             console.log(`listsYesterday: ${JSON.stringify(listsYesterday)}`);
             // * separate the 'Done' list from the other lists
             const { doneList, pendingLists } = splitLists(listsYesterday);
-            await wait(9000);
+            // await wait(4500);
             console.log('just got back from splitLists');
             const newBoard = await createBoard(pendingLists);
             console.log('just got back from createBoard')
             await moveLists(pendingLists, newBoard);
             console.log('just got back from moveLists');
-            await wait(9000);
-            await deleteBoard(boardYesterday);
+            // await wait(4500);
+            // await deleteBoard(boardYesterday);
         }
         // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
         // const yesterday = moment().subtract(1, 'days');
