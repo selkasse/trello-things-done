@@ -291,8 +291,8 @@ exports.handler = function(event, context, callback) {
             await closeBoard(boardYesterday);
         }
         // TODO: delete cards that were scheduled for yesterday from the SCHEDULED_CARDS collection
-        const yesterday = moment().subtract(1, 'days');
-        const formattedYesterday = yesterday.format('YYYY-MM-DD');
+        // const yesterday = moment().subtract(1, 'days');
+        // const formattedYesterday = yesterday.format('YYYY-MM-DD');
 
         // const cardsYesterday = await queryScheduledCards(formattedYesterday);
 
