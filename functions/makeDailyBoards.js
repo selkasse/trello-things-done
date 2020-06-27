@@ -308,7 +308,7 @@ exports.handler = function(event, context, callback) {
         send();
     };
 
-    // * kick off the function when the client sends a request to makeDailyBoards
+    // * kick off the function when a request is made to makeDailyBoards
     makeBoards();
 };
 
