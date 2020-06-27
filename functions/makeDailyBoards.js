@@ -6,10 +6,11 @@ const moment = require('moment');
 const faunadb = require('faunadb');
 
 exports.handler = function(event, context, callback) {
-    const q = faunadb.query;
-    const client = new faunadb.Client({
-        secret: process.env.TTD_FAUNA_SECRET,
-    });
+    // const q = faunadb.query;
+    
+    // const client = new faunadb.Client({
+    //     secret: process.env.TTD_FAUNA_SECRET,
+    // });
     const { BOARDS_URL, LISTS_URL, CARDS_URL, TRELLO_KEY, TRELLO_TOKEN, TRELLO_MEMBER } = process.env;
 
     const createList = async (id, listName) => {
