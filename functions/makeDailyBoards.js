@@ -98,6 +98,7 @@ exports.handler = function(event, context, callback) {
         return results;
     };
     const moveLists = async (pendingLists, newBoard) => {
+        console.log('ENTERING moveLists');
         const lists = await getLists(newBoard);
         const toDo = findList(lists, 'To Do');
 
