@@ -45,7 +45,7 @@
     "netlify": "^4.1.7",
     "netlify-lambda": "^1.6.3",
     "node-cron": "^2.0.3",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "waait": "^1.0.5"
   },
   "devDependencies": {
