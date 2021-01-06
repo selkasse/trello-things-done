@@ -32,7 +32,7 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^2.2.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "browserify": "^16.5.1",
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
